@@ -27,35 +27,35 @@
                 <table class="table table-striped" id="mitabla">
                     <tr>
                         <th>#</th>
-                        <th>Tipoarma Id</th>
-                        <th>Persona Id</th>
-                        <th>Usuario Id</th>
-                        <th>Estado Id</th>
-                        <th>Arma Numorden</th>
-                        <th>Arma Codigo</th>
-                        <th>Arma Fechaingreso</th>
-                        <th>Arma Horaingreso</th>
-                        <th>Arma Procedencia</th>
-                        <th>Arma Marca</th>
-                        <th>Arma Calibre</th>
-                        <th>Arma Aniodotacion</th>
-                        <th>Arma Lugardotacion</th>
-                        <th>Arma Novedades</th>
-                        <th>Arma Responsable</th>
-                        <th>Arma Foto</th>
-                        <th>Actions</th>
+                        <th></th>
+                        <th>Persona</th>
+                        <th>Tipo<br>Arma</th>
+                        <th>Num.<br>Orden</th>
+                        <th>Codigo</th>
+                        <th>Fecha<br>Ingreso</th>
+                        <th>Procedencia</th>
+                        <th>Marca</th>
+                        <th>Calibre</th>
+                        <th>Año<br>Dotación</th>
+                        <th>Lugar<br>Dotación</th>
+                        <th>Novedades</th>
+                        <th>Responsable</th>
+                        <th>Usuario</th>
+                        <th>Estado</th>
+                        <th></th>
                     </tr>
-                    <?php foreach($arma as $a){ ?>
+                    <tbody class="buscar">
+                    <?php
+                    $i = 0;
+                    foreach($arma as $a){ ?>
                     <tr>
-                        <td><?php echo $a['arma_id']; ?></td>
-                        <td><?php echo $a['tipoarma_id']; ?></td>
-                        <td><?php echo $a['persona_id']; ?></td>
-                        <td><?php echo $a['usuario_id']; ?></td>
-                        <td><?php echo $a['estado_id']; ?></td>
+                        <td><?php echo ($i+1); ?></td>
+                        <td><center> <?php echo "<img src='".site_url()."/resources/images/arma/"."thumb_".$a['arma_foto']."' width='40' height='40' class='img-circle'"; ?></center></td>
+                        <td><?php echo $a['persona_apellido']." ".$a['persona_nombre']; ?></td>
+                        <td><?php echo $a['tipoarma_descripcion']; ?></td>
                         <td><?php echo $a['arma_numorden']; ?></td>
                         <td><?php echo $a['arma_codigo']; ?></td>
-                        <td><?php echo $a['arma_fechaingreso']; ?></td>
-                        <td><?php echo $a['arma_horaingreso']; ?></td>
+                        <td><?php echo date("d/m/Y", strtotime($a['arma_fechaingreso'])); echo "<br>".$a['arma_horaingreso']; ?></td>
                         <td><?php echo $a['arma_procedencia']; ?></td>
                         <td><?php echo $a['arma_marca']; ?></td>
                         <td><?php echo $a['arma_calibre']; ?></td>
@@ -63,13 +63,17 @@
                         <td><?php echo $a['arma_lugardotacion']; ?></td>
                         <td><?php echo $a['arma_novedades']; ?></td>
                         <td><?php echo $a['arma_responsable']; ?></td>
-                        <td><?php echo $a['arma_foto']; ?></td>
+                        <td><?php echo $a['usuario_nombre']; ?></td>
+                        <td><?php echo $a['estado_descripcion']; ?></td>
                         <td>
-                            <a href="<?php echo site_url('arma/edit/'.$a['arma_id']); ?>" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> Edit</a> 
-                            <a href="<?php echo site_url('arma/remove/'.$a['arma_id']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span> Delete</a>
+                            <a href="<?php echo site_url('arma/edit/'.$a['arma_id']); ?>" class="btn btn-info btn-xs" title="Modifica Tipo de Arma"><span class="fa fa-pencil"></span></a> 
+                            <!-- <a href="<?php //echo site_url('arma/remove/'.$a['arma_id']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a>-->
                         </td>
                     </tr>
-                    <?php } ?>
+                    <?php
+                    $i++;
+                    } ?>
+                    </tbody>
                 </table>
                                 
             </div>
