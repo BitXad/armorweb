@@ -76,4 +76,19 @@ class Persona_model extends CI_Model
     {
         return $this->db->delete('persona',array('persona_id'=>$persona_id));
     }
+    
+    function get_all_persona_activa()
+    {
+        $persona = $this->db->query("
+            SELECT
+                *
+            FROM
+                `persona`
+            WHERE
+                estado_id = 1
+            ORDER BY `persona_apellido` ASC, `persona_nombre` ASC
+        ")->result_array();
+
+        return $persona;
+    }
 }

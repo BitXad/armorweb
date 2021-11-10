@@ -34,22 +34,22 @@ class Arma extends CI_Controller{
 		if($this->form_validation->run())     
         {   
             $params = array(
-				'tipoarma_id' => $this->input->post('tipoarma_id'),
-				'persona_id' => $this->input->post('persona_id'),
-				'usuario_id' => $this->input->post('usuario_id'),
-				'estado_id' => $this->input->post('estado_id'),
-				'arma_numorden' => $this->input->post('arma_numorden'),
-				'arma_codigo' => $this->input->post('arma_codigo'),
-				'arma_fechaingreso' => $this->input->post('arma_fechaingreso'),
-				'arma_horaingreso' => $this->input->post('arma_horaingreso'),
-				'arma_procedencia' => $this->input->post('arma_procedencia'),
-				'arma_marca' => $this->input->post('arma_marca'),
-				'arma_calibre' => $this->input->post('arma_calibre'),
-				'arma_aniodotacion' => $this->input->post('arma_aniodotacion'),
-				'arma_lugardotacion' => $this->input->post('arma_lugardotacion'),
-				'arma_novedades' => $this->input->post('arma_novedades'),
-				'arma_responsable' => $this->input->post('arma_responsable'),
-				'arma_foto' => $this->input->post('arma_foto'),
+                'tipoarma_id' => $this->input->post('tipoarma_id'),
+                'persona_id' => $this->input->post('persona_id'),
+                'usuario_id' => $this->input->post('usuario_id'),
+                'estado_id' => $this->input->post('estado_id'),
+                'arma_numorden' => $this->input->post('arma_numorden'),
+                'arma_codigo' => $this->input->post('arma_codigo'),
+                'arma_fechaingreso' => $this->input->post('arma_fechaingreso'),
+                'arma_horaingreso' => $this->input->post('arma_horaingreso'),
+                'arma_procedencia' => $this->input->post('arma_procedencia'),
+                'arma_marca' => $this->input->post('arma_marca'),
+                'arma_calibre' => $this->input->post('arma_calibre'),
+                'arma_aniodotacion' => $this->input->post('arma_aniodotacion'),
+                'arma_lugardotacion' => $this->input->post('arma_lugardotacion'),
+                'arma_novedades' => $this->input->post('arma_novedades'),
+                'arma_responsable' => $this->input->post('arma_responsable'),
+                'arma_foto' => $this->input->post('arma_foto'),
             );
             
             $arma_id = $this->Arma_model->add_arma($params);
@@ -57,17 +57,17 @@ class Arma extends CI_Controller{
         }
         else
         {
-			$this->load->model('Tipo_arma_model');
-			$data['all_tipo_arma'] = $this->Tipo_arma_model->get_all_tipo_arma();
+            $this->load->model('Tipo_arma_model');
+            $data['all_tipo_arma'] = $this->Tipo_arma_model->get_all_tipo_arma();
 
-			$this->load->model('Persona_model');
-			$data['all_persona'] = $this->Persona_model->get_all_persona();
+            $this->load->model('Persona_model');
+            $data['all_persona'] = $this->Persona_model->get_all_persona_activa();
 
-			$this->load->model('Usuario_model');
-			$data['all_usuario'] = $this->Usuario_model->get_all_usuario();
+            $this->load->model('Usuario_model');
+            $data['all_usuario'] = $this->Usuario_model->get_all_usuario();
 
-			$this->load->model('Estado_model');
-			$data['all_estado'] = $this->Estado_model->get_all_estado();
+            $this->load->model('Estado_model');
+            $data['all_estado'] = $this->Estado_model->get_all_estado();
             
             $data['_view'] = 'arma/add';
             $this->load->view('layouts/main',$data);
