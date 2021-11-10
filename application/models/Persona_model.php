@@ -35,18 +35,15 @@ class Persona_model extends CI_Model
      */
     function get_all_persona()
     {
-        $persona = $this->db->query("
-            SELECT
-                *
-
-            FROM
-                `persona`
-
-            WHERE
-                1 = 1
-
-            ORDER BY `persona_id` DESC
-        ")->result_array();
+        $persona = $this->db->query(
+            "SELECT p.*, e.estado_descripcion, e.estado_color, tp.tipo_descripcion, gp.grado_descripcion 
+            from persona p 
+            left join estado e on p.estado_id = e.estado_id 
+            left join tipo_persona tp on p.tipo_id = tp.tipo_id 
+            left join grado_persona gp on p.grado_id  = gp.grado_id 
+            where 1=1
+            order by p.persona_id desc 
+            ")->result_array();
 
         return $persona;
     }
