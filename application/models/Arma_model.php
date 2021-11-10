@@ -37,17 +37,18 @@ class Arma_model extends CI_Model
     {
         $arma = $this->db->query("
             SELECT
-                *
-
+                a.*, p.persona_nombre, p.persona_apellido, t.tipoarma_descripcion,
+                u.usuario_nombre, e.estado_color, e.estado_descripcion
             FROM
-                `arma`
-
+                arma a
+            left join tipo_arma t on a.tipoarma_id = t.tipoarma_id
+            LEFT JOIN persona p on a.persona_id = p.persona_id
+            LEFT JOIN usuario u on a.usuario_id = u.usuario_id
+            LEFT JOIN estado e on a.estado_id = e.estado_id
             WHERE
                 1 = 1
-
-            ORDER BY `arma_id` DESC
+            ORDER BY a.`arma_id` DESC
         ")->result_array();
-
         return $arma;
     }
         
