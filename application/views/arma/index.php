@@ -14,8 +14,8 @@
 </script>
 <link href="<?php echo base_url('resources/css/mitabla.css'); ?>" rel="stylesheet">
 <div class="box-header">
-    <font size='4' face='Arial'><b>Gestión de Armas</b></font>
-    <br><font size='2' face='Arial'>Registros Encontrados: <?php echo sizeof($arma); ?></font>
+    <font class="color_fff" size='4' face='Arial'><b>Gestión de Armas</b></font>
+    <br><font class="color_fff" size='2' face='Arial'>Registros Encontrados: <?php echo sizeof($arma); ?></font>
     <div class="box-tools">
         <a href="<?php echo site_url('arma/add'); ?>" class="btn btn-success btn-sm"><fa class='fa fa-pencil-square-o'></fa>Registrar Armas</a> 
     </div>
