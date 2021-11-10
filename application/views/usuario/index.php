@@ -17,7 +17,7 @@
     <font class="color_fff" size='4' face='Arial'><b>Lista de usuario</b></font>
     <br><font class="color_fff" size='2' face='Arial'>Registros Encontrados: <?php echo sizeof($usuario); ?></font>
     <div class="box-tools">
-        <a href="<?php echo site_url('usuario/add'); ?>" class="btn btn-success btn-sm color_fff"><fa class='fa fa-pencil-square-o'></fa>Registrar Tipo de Arma</a> 
+        <a href="<?php echo site_url('usuario/add'); ?>" class="btn btn-success btn-sm color_fff"><fa class='fa fa-pencil-square-o'></fa>Registrar Usuario</a> 
     </div>
 </div>
 

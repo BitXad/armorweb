@@ -9,6 +9,7 @@ class Usuario extends CI_Controller{
     {
         parent::__construct();
         $this->load->model('Usuario_model');
+        $this->load->library('form_validation');
     } 
 
     /*
@@ -27,11 +28,14 @@ class Usuario extends CI_Controller{
      */
     function add()
     {   
-        if(isset($_POST) && count($_POST) > 0)     
-        {   
+        $this->form_validation->set_rules('usuario_nombre', 'Usuario Nombre', 'required');
+        $this->form_validation->set_rules('usuario_login', 'usuario_login', 'required|is_unique[usuario.usuario_login]',array('is_unique' => 'Este login de usuario ya existe.'));
+        // if(isset($_POST) && count($_POST) > 0)
+        if($this->form_validation->run()){   
             $params = array(
 				'usuario_nombre' => $this->input->post('usuario_nombre'),
 				'usuario_login' => $this->input->post('usuario_login'),
+                'usuario_clave' => md5($this->input->post('usuario_clave')),
             );
             
             $usuario_id = $this->Usuario_model->add_usuario($params);
@@ -59,6 +63,7 @@ class Usuario extends CI_Controller{
                 $params = array(
 					'usuario_nombre' => $this->input->post('usuario_nombre'),
 					'usuario_login' => $this->input->post('usuario_login'),
+                    'usuario_clave' => md5($this->input->post('usuario_clave')),
                 );
 
                 $this->Usuario_model->update_usuario($usuario_id,$params);            
