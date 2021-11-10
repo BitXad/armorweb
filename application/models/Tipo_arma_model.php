@@ -38,16 +38,12 @@ class Tipo_arma_model extends CI_Model
         $tipo_arma = $this->db->query("
             SELECT
                 *
-
             FROM
                 `tipo_arma`
-
             WHERE
                 1 = 1
-
-            ORDER BY `tipoarma_id` DESC
+            ORDER BY `tipoarma_descripcion` ASC
         ")->result_array();
-
         return $tipo_arma;
     }
         
