@@ -22,10 +22,10 @@
 </style>
 
 <div class="box-header">
-    <font size='4' face='Arial'><b>Personas</b></font>
-    <br><font size='2' face='Arial'>Registros Encontrados: <?php echo sizeof($persona); ?></font>
+    <font size='4' face='Arial' class="color_fff"><b>Personas</b></font>
+    <br><font size='2' face='Arial' class="color_fff">Registros Encontrados: <?php echo sizeof($persona); ?></font>
     <div class="box-tools">
-        <a href="<?php echo site_url('persona/add'); ?>" class="btn btn-success btn-sm"><fa class='fa fa-pencil-square-o'></fa> Registrar persona</a> 
+        <a href="<?php echo site_url('persona/add'); ?>" class="btn btn-success btn-sm color_fff"><fa class='fa fa-pencil-square-o'></fa> Registrar persona</a> 
     </div>
 </div>
 

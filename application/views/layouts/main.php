@@ -19,6 +19,7 @@
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="<?php echo site_url('resources/css/_all-skins.min.css');?>">
+        <link rel="stylesheet" href="<?php echo site_url('resources/css/main.css');?>">
     </head>
     
     <body class="hold-transition skin-blue sidebar-mini">
@@ -206,7 +207,7 @@
             </aside>
 
             <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
+            <div class="content-wrapper" id="content-background-image">
                 <!-- Main content -->
                 <section class="content">
                     <?php                    

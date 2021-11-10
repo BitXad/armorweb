@@ -14,10 +14,10 @@
 </script>
 <link href="<?php echo base_url('resources/css/mitabla.css'); ?>" rel="stylesheet">
 <div class="box-header">
-    <font size='4' face='Arial'><b>Tipo de Arma</b></font>
-    <br><font size='2' face='Arial'>Registros Encontrados: <?php echo sizeof($tipo_arma); ?></font>
+    <font class="color_fff" size='4' face='Arial'><b>Tipo de Arma</b></font>
+    <br><font class="color_fff" size='2' face='Arial'>Registros Encontrados: <?php echo sizeof($tipo_arma); ?></font>
     <div class="box-tools">
-        <a href="<?php echo site_url('tipo_arma/add'); ?>" class="btn btn-success btn-sm"><fa class='fa fa-pencil-square-o'></fa>Registrar Tipo de Arma</a> 
+        <a href="<?php echo site_url('tipo_arma/add'); ?>" class="btn btn-success btn-sm color_fff"><fa class='fa fa-pencil-square-o'></fa>Registrar Tipo de Arma</a> 
     </div>
 </div>
 <div class="row">

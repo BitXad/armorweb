@@ -22,8 +22,8 @@
 </style>
 
 <div class="box-header">
-    <font size='4' face='Arial'><b>Grado de persona</b></font>
-    <br><font size='2' face='Arial'>Registros Encontrados: <?php echo sizeof($grado_persona); ?></font>
+    <font class="color_fff" size='4' face='Arial'><b>Grado de persona</b></font>
+    <br><font class="color_fff" size='2' face='Arial'>Registros Encontrados: <?php echo sizeof($grado_persona); ?></font>
     <div class="box-tools">
         <a href="<?php echo site_url('grado_persona/add'); ?>" class="btn btn-success btn-sm"><fa class='fa fa-pencil-square-o'></fa> Registrar grado</a> 
     </div>
