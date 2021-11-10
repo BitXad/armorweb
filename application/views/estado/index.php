@@ -2,8 +2,8 @@
 <link href="<?php echo base_url('resources/css/mitabla.css'); ?>" rel="stylesheet">
 <!-------------------------------------------------------->
 <div class="box-header">
-    <font size='4' face='Arial'><b>Estados</b></font>
-    <br><font size='2' face='Arial'>Registros Encontrados: <?php echo sizeof($estado); ?></font>
+    <font class="color_fff" size='4' face='Arial'><b>Estados</b></font>
+    <br><font class="color_fff" size='2' face='Arial'>Registros Encontrados: <?php echo sizeof($estado); ?></font>
     <div class="box-tools no-print">
         <a href="<?php echo site_url('estado/add'); ?>" class="btn btn-success btn-sm"><fa class='fa fa-pencil-square-o'></fa> Registrar Estado</a>
     </div>
