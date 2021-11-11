@@ -99,7 +99,6 @@
                                 <i class="fa fa-dashboard"></i> <span>Inicio</span>
                             </a>
                         </li>
-<<<<<<< HEAD
                         <li>
                             <a href="<?php echo site_url('arma');?>">
                                 <i class="fa fa-legal"></i> <span>Arma</span>
@@ -139,113 +138,6 @@
                             <a href="<?php echo site_url('usuario');?>">
                                 <i class="fa fa-user-circle-o"></i> <span>Usuario</span>
                             </a>
-=======
-
-                        <li>
-                            <a href="<?php echo site_url('registro/index');?>">
-                                <i class="fa fa-address-card-o"></i> <span>Registro</span>
-                            </a>
-                            <!-- <ul class="treeview-menu">
-								<li class="active">
-                                    <a href="<?php echo site_url('registro/add');?>"><i class="fa fa-plus"></i> Agregar</a>
-                                </li>
-								<li>
-                                    <a href="<?php echo site_url('registro/index');?>"><i class="fa fa-list-ul"></i> Listar</a>
-                                </li>
-							</ul> -->
-                        </li>
-                        <li>
-                            <a href="<?php echo site_url('persona/index');?>">
-                                <i class="fa fa-address-book-o"></i> <span>Persona</span>
-                            </a>
-                            <!-- <ul class="treeview-menu">
-								<li class="active">
-                                    <a href="<?php echo site_url('persona/add');?>"><i class="fa fa-plus"></i> Agregar</a>
-                                </li>
-								<li>
-                                    <a href="<?php echo site_url('persona/index');?>"><i class="fa fa-list-ul"></i> Listar</a>
-                                </li>
-							</ul> -->
-                        </li>
-						<li>
-                            <a href="<?php echo site_url('arma/index');?>">
-                                <i class="fa fa-legal"></i> <span>Arma</span>
-                            </a>
-                            <!-- <ul class="treeview-menu">
-								<li class="active">
-                                    <a href="<?php echo site_url('arma/add');?>"><i class="fa fa-plus"></i> Agregar</a>
-                                </li>
-								<li>
-                                    <a href="<?php echo site_url('arma/index');?>"><i class="fa fa-list-ul"></i> Listar</a>
-                                </li>
-							</ul> -->
-                        </li>
-						<li>
-                            <a href="<?php echo site_url('estado/index');?>">
-                                <i class="fa fa-chain-broken"></i> <span>Estado</span>
-                            </a>
-                            <!-- <ul class="treeview-menu">
-								<li class="active">
-                                    <a href="<?php echo site_url('estado/add');?>"><i class="fa fa-plus"></i> Agregar</a>
-                                </li>
-								<li>
-                                    <a href="<?php echo site_url('estado/index');?>"><i class="fa fa-list-ul"></i> Listar</a>
-                                </li>
-							</ul> -->
-                        </li>
-						<li>
-                            <a href="<?php echo site_url('grado_persona/index');?>">
-                                <i class="fa fa-fire"></i> <span>Grado Persona</span>
-                            </a>
-                            <!-- <ul class="treeview-menu">
-								<li class="active">
-                                    <a href="<?php echo site_url('grado_persona/add');?>"><i class="fa fa-plus"></i> Agregar</a>
-                                </li>
-								<li>
-                                    <a href="<?php echo site_url('grado_persona/index');?>"><i class="fa fa-list-ul"></i> Listar</a>
-                                </li>
-							</ul> -->
-                        </li>
-						
-						<li>
-                            <a href="<?php echo site_url('tipo_persona/index');?>">
-                                <i class="fa fa-group"></i> <span>Tipo Persona</span>
-                            </a>
-                            <!-- <ul class="treeview-menu">
-								<li class="active">
-                                    <a href="<?php echo site_url('tipo_persona/add');?>"><i class="fa fa-plus"></i> Agregar</a>
-                                </li>
-								<li>
-                                    <a href="<?php echo site_url('tipo_persona/index');?>"><i class="fa fa-list-ul"></i> Listar</a>
-                                </li>
-							</ul> -->
-                        </li>
-                        <li>
-                            <a href="<?php echo site_url('tipo_arma/index');?>">
-                                <i class="fa fa-codepen"></i> <span>Tipo Arma</span>
-                            </a>
-                            <!-- <ul class="treeview-menu">
-								<li class="active">
-                                    <a href="<?php echo site_url('tipo_arma/add');?>"><i class="fa fa-plus"></i> Agregar</a>
-                                </li>
-								<li>
-                                    <a href="<?php echo site_url('tipo_arma/index');?>"><i class="fa fa-list-ul"></i> Listar</a>
-                                </li>
-							</ul> -->
-                        </li>
-						<li>
-                            <a href="<?php echo site_url('usuario/index');?>">
-                                <i class="fa fa-user-circle-o"></i> <span>Usuario</span>
-                            </a>
-                            <!-- <ul class="treeview-menu">
-								<li class="active">
-                                    <a href="<?php echo site_url('usuario/add');?>"><i class="fa fa-plus"></i> Agregar</a>
-                                </li>
-								<li>
-                                    <a href="<?php echo site_url('usuario/index');?>"><i class="fa fa-list-ul"></i> Listar</a>
-                                </li>
-							</ul> -->
->>>>>>> master
                         </li>
                     </ul>
                 </section>
