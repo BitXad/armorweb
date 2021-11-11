@@ -24,7 +24,7 @@
 <!-- ---------------- ESTILO DE LAS TABLAS --------------- -->
 <link href="<?php echo base_url('resources/css/mitabla.css'); ?>" rel="stylesheet">
 <!-- ---------------------------------------------------- -->
-<div class="box-header">
+<div class="box-header" style="color: white">
 <!--                <h3 class="box-title">Usuarios</h3>-->
             	<div class="box-tools">
                     <a href="<?php echo site_url('usuario/add'); ?>" class="btn btn-success btn-sm">+ Añadir</a> 
@@ -58,7 +58,7 @@
                         <!--<th>Tipo</th>-->
                         <th>Email</th>
                         <th>Login</th>
-                        <th>Perfil</th>
+                        <!--<th>Perfil</th>-->
                         <!--<th>Imagen</th>-->
                         <th>Estado</th>
                         <th></th>
@@ -77,13 +77,20 @@
 
                     <tr>
                         <td><?php echo $cont ?></td>
-                        <td><center> <?php echo "<img src='".site_url()."/resources/images/usuarios/"."thumb_".$u['usuario_imagen']."' width='40' height='40' class='img-circle'"; ?></center></td>
+                        <td>
+                            <center>
+                                <?php
+                                $usuarioimagen = "default_thumb.jpg";
+                                if($u['usuario_imagen'] <> null && $u['usuario_imagen'] <> ""){
+                                    $usuarioimagen = "thumb_".$u['usuario_imagen'];
+                                }
+                                echo "<img src='".site_url()."/resources/images/usuarios/".$usuarioimagen."' width='40' height='40' class='img-circle'"; ?></center></td>
                         <td><font face="Arial" size="3"><b><?php echo $u['usuario_nombre']; ?></b></font>
                             <br>
-                            <?php echo $u['tipousuario_descripcion']; ?></td>
+                            <?php //echo $u['tipousuario_descripcion']; ?></td>
                       	<td><?php echo $u['usuario_email']; ?></td>
                         <td><?php echo $u['usuario_login']; ?></td>
-                        <td class="text-center"><?php echo $u['parametro_id']; ?></td>
+                        <!--<td class="text-center"><?php //echo $u['parametro_id']; ?></td>-->
                         <td style="background-color: #<?php echo $u['estado_color']; ?>"><?php echo $u['estado_descripcion']; ?></td>
                         <td>
                             <a href="<?php echo site_url('usuario/editar/'. $u['usuario_id']); ?>" class="btn btn-info btn-xs" title="Modificar datos de usuario"><span class="fa fa-pencil"></span></a>
@@ -95,7 +102,7 @@
                             <?php
                             }
                             ?>
-                            <a href="<?php echo site_url('usuario/password/'.$u['usuario_id']); ?>" class="btn btn-success btn-xs" title="Cambiar contraseña"><span class="fa fa-asterisk"></span></a>
+                            <!--<a href="<?php //echo site_url('usuario/password/'.$u['usuario_id']); ?>" class="btn btn-success btn-xs" title="Cambiar contraseña"><span class="fa fa-asterisk"></span></a>-->
                             <!------------------------ INICIO modal para cambiar PASSWORD ------------------->
                             <div class="modal fade" id="modalcambiar<?php echo $i; ?>" tabindex="-1" role="dialog" aria-labelledby="modalcambiarlabel<?php echo $i; ?>">
                                 <div class="modal-dialog" role="document">

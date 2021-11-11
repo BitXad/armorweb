@@ -34,10 +34,14 @@ class Verificar extends CI_Controller
                     'usuario_id' => $result->usuario_id,
                     'usuario_nombre' => $result->usuario_nombre,
                     'estado_id' => $result->estado_id,
+                    'tipousuario_id' => 1,
+                    'tipousuario_descripcion' => '',
                     'usuario_imagen' => $laimagen,
                     'usuario_email' => $result->usuario_email,
                     'usuario_clave' => $result->usuario_clave,
                     'thumb' => $thumb,
+                    //'rol' => $rolusuario,
+                    //'codigo' => $this->get_codigo_empresa()
                 );
                 
                 $this->session->set_userdata('logged_in', $sess_array);

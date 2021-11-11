@@ -1,3 +1,4 @@
+<script src="<?php echo base_url('resources/js/jquery-2.2.3.min.js'); ?>" type="text/javascript"></script>
 <link href="<?php echo site_url('resources/css/formValidation.css')?>" rel="stylesheet">
 <div class="row">
     <div class="col-md-12">
@@ -16,21 +17,21 @@
                             <span class="text-danger"><?php echo form_error('usuario_nombre');?></span>
                     </div>
                     </div>
-                    <div class="col-md-6">
+                    <!--<div class="col-md-6">
                         <label for="tipousuario_id" class="control-label">Tipo</label>
                         <div class="form-group">
                             <select name="tipousuario_id" class="form-control" required>
                                 <option value="">Tipo de usuario</option>
                                 <?php 
-                                foreach($all_tipo_usuario as $tipo_usuario)
+                                /*foreach($all_tipo_usuario as $tipo_usuario)
                                 {
                                     $selected = ($tipo_usuario['tipousuario_id'] == $this->input->post('tipousuario_id')) ? ' selected="selected"' : "";
                                     echo '<option value="'.$tipo_usuario['tipousuario_id'].'" '.$selected.'>'.$tipo_usuario['tipousuario_descripcion'].'</option>';
-                                } 
+                                }*/
                                 ?>
                             </select>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="col-md-6">
                         <label for="usuario_email" class="control-label">Email</label>
                         <div class="form-group">
@@ -58,19 +59,19 @@
                             <input type="password" name="rusuario_clave"  class="form-control" id="rusuario_clave" required/>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <!--<div class="col-md-4">
                         <label for="parametro_id" class="control-label">Perfil</label>
                         <div class="form-group">
                             <select name="parametro_id" id="parametro_id" class="form-control">
                                 <?php 
-                                foreach($all_parametros as $parametro)
+                                /*foreach($all_parametros as $parametro)
                                 {
                                     echo '<option value="'.$parametro['parametro_id'].'">'.$parametro['parametro_id'].'</option>';
-                                } 
+                                }*/
                                 ?>
                             </select>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="col-md-6">
                         <label for="user_imagen" class="control-label">Imagen</label>
                         <div class="form-group">
@@ -136,9 +137,9 @@
                 },
                 usuario_email: {
                     validators: {
-                        notEmpty: {
+                        /*notEmpty: {
                             message: 'Email es un campo requerido'
-                        },
+                        },*/
                         emailAddress: {
                             message: 'Entrada no es un email valido'
                         }

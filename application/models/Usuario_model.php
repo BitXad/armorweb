@@ -55,17 +55,16 @@ class Usuario_model extends CI_Model
         
         $usuario = $this->db->query("
             SELECT
-                u.*, t.*, e.*
+                u.*, e.*
 
             FROM
-                usuario u, tipo_usuario t, estado e
+                usuario u, estado e
 
             WHERE
-                u.tipousuario_id=t.tipousuario_id and
                 u.estado_id=e.estado_id
                
 
-            ORDER BY `usuario_id` DESC
+            ORDER BY `usuario_nombre` ASC
 
             
         ")->result_array();
@@ -160,39 +159,6 @@ class Usuario_model extends CI_Model
         return $usuario;
     }*/
     
-    /******** Función que muestra a todos los usuarios Activos (ERA PARA PREVENDEDORES AHORA ESPARA USUARIOS ACTIVOS) ************/
-    function get_all_usuario_prev_activo()
-    {
-        $usuario = $this->db->query("
-            SELECT
-                *
-            FROM
-                usuario u, estado e
-            WHERE
-                u.estado_id = e.estado_id
-                and e.estado_id = 1
-            ORDER BY `usuario_id` DESC 
-        ")->result_array();
-        return $usuario;
-    }
-
-    /*
-    *
-    */
-    function get_all_usuario_prev_activo_sesion($usuario_id){
-        $usuario = $this->db->query("
-            SELECT *
-            FROM
-                usuario u, estado e
-            WHERE
-                u.estado_id = e.estado_id
-                and e.estado_id = 1
-                and u.usuario_id = ".$usuario_id."
-            ORDER BY `usuario_id` DESC 
-        ")->row_array();
-        return $usuario;
-    }
-    
     /* Funcion que retorna el nombre del usuario*/
     function get_usuario_name($servicio_id)
     {
@@ -238,48 +204,7 @@ class Usuario_model extends CI_Model
         
         return $usuario;
     }
-    /******** Función que muestra a todos los usuarios Prevendedores ************/
-    function get_all_usuario_prev()
-    {
-        $usuario = $this->db->query("
-            SELECT
-                u.usuario_id, u.usuario_nombre, u.usuario_imagen, e.estado_color,
-                e.estado_descripcion, t.tipousuario_descripcion
-
-            FROM
-                usuario u, estado e, tipo_usuario t
-
-            WHERE
-                u.estado_id = e.estado_id
-                and u.tipousuario_id = t.tipousuario_id
-
-            ORDER BY `usuario_id` DESC 
-
-        ")->result_array();
-
-        return $usuario;
-    }
-    /******** Función que muestra a todos los usuarios TECNICOS responsables ************/
-    function get_all_usuario_tecnicoresponsable_ok()
-    {
-        $usuario = $this->db->query("
-            SELECT
-                u.usuario_id, u.usuario_nombre
-
-            FROM
-                usuario u, estado e, tipo_usuario t
-
-            WHERE
-                u.estado_id = e.estado_id
-                and u.tipousuario_id = t.tipousuario_id
-                and u.`tipousuario_id` = 5
-                and u.`estado_id` = 1
-            ORDER BY `usuario_id` DESC 
-        ")->result_array();
-
-        return $usuario;
-    }
-
+    
     function get_tipo_respuesta()
     {
         $sql = "select * from tipo_respuesta";

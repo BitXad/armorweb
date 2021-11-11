@@ -24,22 +24,22 @@
 							<span class="text-danger"><?php echo form_error('usuario_nombre');?></span>
 						</div>
 					</div>
-					<div class="col-md-6">
+					<!--<div class="col-md-6">
 						<label for="tipousuario_id" class="control-label">Tipo</label>
 						<div class="form-group">
 							<select name="tipousuario_id" class="form-control">
 								<option value="">seleccionar tipo de usuario</option>
 								<?php 
-								foreach($all_tipo_usuario as $tipo_usuario)
+								/*foreach($all_tipo_usuario as $tipo_usuario)
 								{
 									$selected = ($tipo_usuario['tipousuario_id'] == $usuario['tipousuario_id']) ? ' selected="selected"' : "";
 
 									echo '<option value="'.$tipo_usuario['tipousuario_id'].'" '.$selected.'>'.$tipo_usuario['tipousuario_descripcion'].'</option>';
-								} 
+								}*/
 								?>
 							</select>
 						</div>
-					</div>
+					</div>-->
 				
 					<div class="col-md-6">
 						<label for="usuario_email" class="control-label">Email</label>
@@ -56,21 +56,21 @@
                             <div id="user-result"></div>
 						</div>
 					</div>
-                    <div class="col-md-3">
+                    <!--<div class="col-md-3">
                         <label for="parametro_id" class="control-label">Perfil</label>
                         <div class="form-group">
                             <select name="parametro_id" id="parametro_id" class="form-control">
-                                <!--<option value="1">ACTIVO</option>-->
+                                
                                 <?php 
-                                foreach($all_parametros as $parametro)
+                                /*foreach($all_parametros as $parametro)
                                 {
                                     $selected = ($parametro['parametro_id'] == $usuario['parametro_id']) ? ' selected="selected"' : "";
                                     echo '<option value="'.$parametro['parametro_id'].'" '.$selected.'>'.$parametro['parametro_id'].'</option>';
-                                } 
+                                }*/
                                 ?>
                             </select>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="col-md-3">
                         <label for="estado_id" class="control-label">Estado</label>
                         <div class="form-group">

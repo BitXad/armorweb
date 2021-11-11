@@ -10,8 +10,8 @@ class Usuario extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Usuario_model');
-        $this->load->model('Rol_usuario_model');
-        $this->load->model('Tipo_usuario_model');
+        //$this->load->model('Rol_usuario_model');
+        //$this->load->model('Tipo_usuario_model');
         $this->load->library('form_validation');
         $this->load->model('user_model');
         if ($this->session->userdata('logged_in')) {
@@ -21,7 +21,7 @@ class Usuario extends CI_Controller
         }
     }
 
-private function acceso($id_rol){
+    /*private function acceso($id_rol){
         $rolusuario = $this->session_data['rol'];
         if($rolusuario[$id_rol-1]['rolusuario_asignado'] == 1){
             return true;
@@ -29,27 +29,15 @@ private function acceso($id_rol){
             $data['_view'] = 'login/mensajeacceso';
             $this->load->view('layouts/main',$data);
         }
-    }
+    }*/
     /*
      * Listing of usuario
      */
     function index($a = null)
     {
-        if($this->acceso(148)){
-
-                /*$data = array(
-                    'usuario_login' => $session_data['usuario_login'],
-                    'usuario_id' => $session_data['usuario_id'],
-                    'usuario_nombre' => $session_data['usuario_nombre'],
-                    'rol' => $this->getRol($session_data['tipousuario_id']),
-                    'tipousuario_id' => $session_data['tipousuario_id'],
-                    'usuario_imagen' => $session_data['usuario_imagen'],
-                    'usuario_email' => $session_data['usuario_email'],
-                    'page_title' => 'Admin >> Mi Cuenta',
-                    'thumb' => $session_data['thumb']
-                );*/
-
-                
+        //if($this->acceso(148)){
+        if ($this->session->userdata('logged_in')) {
+        
                 $config = $this->config->item('pagination');
                 $config['base_url'] = site_url('usuario/index?');
                 $data['mensaje'] = $a;
@@ -67,7 +55,10 @@ private function acceso($id_rol){
 
                 $this->load->view('layouts/main', $data);
 
-            }
+            //}
+        }else {
+            redirect('', 'refresh');
+        }
 
     }
 
@@ -76,7 +67,8 @@ private function acceso($id_rol){
      */
     function add()
     {
-        if($this->acceso(148)){
+        //if($this->acceso(148)){
+        if ($this->session->userdata('logged_in')) {
 
                /* $data = array(
                     'usuario_login' => $session_data['usuario_login'],
@@ -157,13 +149,13 @@ private function acceso($id_rol){
 
                     $params = array(
                         'estado_id' => 1,
-                        'tipousuario_id' => $this->input->post('tipousuario_id'),
+                        //'tipousuario_id' => $this->input->post('tipousuario_id'),
                         'usuario_nombre' => $this->input->post('usuario_nombre'),
                         'usuario_email' => $this->input->post('usuario_email'),
                         'usuario_login' => $this->input->post('usuario_login'),
                         'usuario_clave' => md5($this->input->post('usuario_clave')),
                         'usuario_imagen' => $foto,
-                        'parametro_id' => $this->input->post('parametro_id'),
+                        //'parametro_id' => $this->input->post('parametro_id'),
                     );
 
 
@@ -171,23 +163,27 @@ private function acceso($id_rol){
                     redirect('usuario/index');
                 } else {
                    
-                    $this->load->model('Tipo_usuario_model');
-                    $data['all_tipo_usuario'] = $this->Tipo_usuario_model->get_all_tipo_usuario();
-                    $this->load->model('parametro_model');
-                    $data['all_parametros'] = $this->parametro_model->get_all_parametros();
+                    //$this->load->model('Tipo_usuario_model');
+                    //$data['all_tipo_usuario'] = $this->Tipo_usuario_model->get_all_tipo_usuario();
+                    //$this->load->model('parametro_model');
+                    //$data['all_parametros'] = $this->parametro_model->get_all_parametros();
                     $data['page_title'] = "Usuarios";
                     $data['_view'] = 'usuario/add';
                     $this->load->view('layouts/main', $data);
                 }
 
-            } 
+            //
+        }else {
+            redirect('', 'refresh');
+        }
+                
 
     }
 
     function editar($usuario_id){
 
-        if($this->acceso(148)){
-
+        //if($this->acceso(148)){
+        if ($this->session->userdata('logged_in')) {
 
                 /*$data = array(
                     'usuario_login' => $session_data['usuario_login'],
@@ -204,17 +200,21 @@ private function acceso($id_rol){
                 $data['usuario'] = $this->Usuario_model->get_usuario($usuario_id);
 
                 $this->load->model('Estado_model');
-                $data['all_estado'] = $this->Estado_model->get_all_estado_activo_inactivo();
-                $this->load->model('parametro_model');
-                $data['all_parametros'] = $this->parametro_model->get_all_parametros();
-                $this->load->model('Tipo_usuario_model');
-                $data['all_tipo_usuario'] = $this->Tipo_usuario_model->get_all_tipo_usuario();
+                $tipo = 1;
+                $data['all_estado'] = $this->Estado_model->get_tipo_estado($tipo);
+                //$this->load->model('parametro_model');
+                //$data['all_parametros'] = $this->parametro_model->get_all_parametros();
+               // $this->load->model('Tipo_usuario_model');
+                //$data['all_tipo_usuario'] = $this->Tipo_usuario_model->get_all_tipo_usuario();
                 $data['page_title'] = "Usuario";
                 $data['_view'] = 'usuario/edit';
                 $this->load->view('layouts/main', $data);
 
 
-            }
+            //}
+        }else {
+            redirect('', 'refresh');
+        }
     }
 
     /*
@@ -222,7 +222,8 @@ private function acceso($id_rol){
      */
     function edit($usuario_id)
     {
-        if($this->acceso(148)){
+        //if($this->acceso(148)){
+        if ($this->session->userdata('logged_in')) {
         $original_value = $this->db->query("SELECT usuario_login FROM usuario WHERE usuario_id = " . $usuario_id)->row()->usuario_login;
 
         if ($this->input->post('usuario_login') != $original_value) {
@@ -312,7 +313,7 @@ private function acceso($id_rol){
             /* *********************FIN imagen***************************** */
                 $params = array(
                     'estado_id' => $this->input->post('estado_id'),
-                    'tipousuario_id' => $this->input->post('tipousuario_id'),
+                    //'tipousuario_id' => $this->input->post('tipousuario_id'),
                     'usuario_nombre' => $this->input->post('usuario_nombre'),
                     'usuario_email' => $this->input->post('usuario_email'),
                     'usuario_login' => $this->input->post('usuario_login'),
@@ -325,7 +326,8 @@ private function acceso($id_rol){
 
             } else {
                 $this->load->model('Estado_model');
-                $data['all_estado'] = $this->Estado_model->get_all_estado_activo_inactivo();
+                $tipo = 1;
+                $data['all_estado'] = $this->Estado_model->get_tipo_estado($tipo);
 
                 $this->load->model('Tipo_usuario_model');
                 $data['all_tipo_usuario'] = $this->Tipo_usuario_model->get_all_tipo_usuario();
@@ -335,6 +337,9 @@ private function acceso($id_rol){
             }
         } else
             show_error('The usuario you are trying to edit does not exist.');
+        //}
+        }else {
+            redirect('', 'refresh');
         }
     }
 
@@ -342,7 +347,8 @@ private function acceso($id_rol){
     function password($usuario_id)
     {
         // check if the usuario exists before trying to edit it
-        if($this->acceso(148)){
+        //if($this->acceso(148)){
+        if ($this->session->userdata('logged_in')) {
         $data['usuario'] = $this->Usuario_model->get_usuario($usuario_id);
 
         if (isset($data['usuario']['usuario_id'])) {
@@ -394,6 +400,9 @@ private function acceso($id_rol){
             }
         } else
             show_error('The usuario you are trying to edit does not exist.');
+        //}
+        }else {
+            redirect('', 'refresh');
         }
     }
 
@@ -402,7 +411,8 @@ private function acceso($id_rol){
      */
     function remove($usuario_id)
     {
-        if($this->acceso(148)){
+        //if($this->acceso(148)){
+        if ($this->session->userdata('logged_in')) {
         $usuario = $this->Usuario_model->get_usuario($usuario_id);
 
         // check if the usuario exists before trying to delete it
@@ -411,6 +421,9 @@ private function acceso($id_rol){
             redirect('usuario/index');
         } else
             show_error('The usuario you are trying to delete does not exist.');
+        //}
+        }else {
+            redirect('', 'refresh');
         }
     }
 
@@ -434,8 +447,8 @@ private function acceso($id_rol){
 
     function set()
     {
-        if($this->acceso(148)){
-
+        //if($this->acceso(148)){
+        if ($this->session->userdata('logged_in')) {
                 $this->form_validation->set_rules('usuario_nombre', 'Nombre', 'trim|required|min_length[3]|max_length[150]');
                 //$this->form_validation->set_rules('usuario_email', 'Email', 'trim|required|valid_email|min_length[5]|max_length[250]|callback_hay_email2');//OJO
                 //$this->form_validation->set_message('hay_email2', 'El email ya se registro, escriba uno diferente');
@@ -463,10 +476,11 @@ private function acceso($id_rol){
                     $data['usuario'] = $this->Usuario_model->get_usuario($usuario_id);
 
                     $this->load->model('Estado_model');
-                    $data['all_estado'] = $this->Estado_model->get_all_estado_activo_inactivo();
+                    $tipo = 1;
+                    $data['all_estado'] = $this->Estado_model->get_tipo_estado($tipo);
 
-                    $this->load->model('Tipo_usuario_model');
-                    $data['all_tipo_usuario'] = $this->Tipo_usuario_model->get_all_tipo_usuario();
+                    //$this->load->model('Tipo_usuario_model');
+                    //$data['all_tipo_usuario'] = $this->Tipo_usuario_model->get_all_tipo_usuario();
                     $data['page_title'] = "Usuario";
                     $data['_view'] = 'usuario/edit';
                     $this->load->view('layouts/main', $data);
@@ -548,8 +562,8 @@ private function acceso($id_rol){
                         'usuario_imagen' => $foto,
                         'usuario_login' => $this->input->post('usuario_login'),
                         'estado_id' => $this->input->post('estado_id'),
-                        'tipousuario_id' => $this->input->post('tipousuario_id'),
-                        'parametro_id' => $this->input->post('parametro_id')
+                        //'tipousuario_id' => $this->input->post('tipousuario_id'),
+                        //'parametro_id' => $this->input->post('parametro_id')
                     );
 
                     if (!$this->user_model->update_usuario($data, $usuario_id)) {
@@ -567,7 +581,10 @@ private function acceso($id_rol){
                         redirect('usuario');
                     }
                 }
-            } 
+            //} 
+        }else {
+            redirect('', 'refresh');
+        }
     }
 
     public function hay_email2($email_field)
@@ -592,7 +609,8 @@ private function acceso($id_rol){
     
     function nueva_clave($usuario_id)
     {
-        if($this->acceso(148)){
+        //if($this->acceso(148)){
+        if ($this->session->userdata('logged_in')) {
         $data['usuario'] = $this->Usuario_model->get_usuario($usuario_id);
 
         if(isset($data['usuario']['usuario_id'])){
@@ -639,6 +657,9 @@ private function acceso($id_rol){
             }*/
         }else
             show_error('The usuario you are trying to edit does not exist.');
+        //}
+        }else {
+            redirect('', 'refresh');
         }
     }
 }
