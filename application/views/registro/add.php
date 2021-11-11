@@ -82,25 +82,25 @@
 					<div class="col-md-6">
 						<label for="registro_fechasalida" class="control-label">Fecha salida</label>
 						<div class="form-group">
-							<input type="date" name="registro_fechasalida" value="<?php echo $this->input->post('registro_fechasalida'); ?>" class="has-datepicker form-control" id="registro_fechasalida" />
+							<input type="date" name="registro_fechasalida" value="<?php echo date('Y-m-d'); ?>" class="form-control" id="registro_fechasalida" />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<label for="registro_horasalida" class="control-label">Hora salida</label>
 						<div class="form-group">
-							<input type="time" name="registro_horasalida" value="<?php echo $this->input->post('registro_horasalida'); ?>" class="form-control" id="registro_horasalida" />
+							<input type="time" name="registro_horasalida" value="<?php echo date('H:m:s'); ?>" class="form-control" id="registro_horasalida" />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<label for="registro_fechaingreso" class="control-label">Fecha ingreso</label>
 						<div class="form-group">
-							<input type="text" name="registro_fechaingreso" value="<?php echo $this->input->post('registro_fechaingreso'); ?>" class="has-datepicker form-control" id="registro_fechaingreso" />
+							<input type="date" name="registro_fechaingreso" value="<?php echo $this->input->post('registro_fechaingreso'); ?>" class="form-control" id="registro_fechaingreso" />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<label for="registro_horaingreso" class="control-label">Hora ingreso</label>
 						<div class="form-group">
-							<input type="text" name="registro_horaingreso" value="<?php echo $this->input->post('registro_horaingreso'); ?>" class="form-control" id="registro_horaingreso" />
+							<input type="time" name="registro_horaingreso" value="<?php echo $this->input->post('registro_horaingreso'); ?>" class="form-control" id="registro_horaingreso" />
 						</div>
 					</div>
 					<div class="col-md-6">
