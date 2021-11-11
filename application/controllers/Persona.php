@@ -13,6 +13,11 @@ class Persona extends CI_Controller{
         $this->load->model('Tipo_persona_model');
         $this->load->model('Grado_persona_model');
         $this->load->library('form_validation');
+        if ($this->session->userdata('logged_in')) {
+            $this->session_data = $this->session->userdata('logged_in');
+        }else {
+            redirect('', 'refresh');
+        }
     } 
 
     /*

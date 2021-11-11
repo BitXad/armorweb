@@ -9,6 +9,11 @@ class Tipo_arma extends CI_Controller{
     {
         parent::__construct();
         $this->load->model('Tipo_arma_model');
+        if ($this->session->userdata('logged_in')) {
+            $this->session_data = $this->session->userdata('logged_in');
+        }else {
+            redirect('', 'refresh');
+        }
     } 
 
     /*

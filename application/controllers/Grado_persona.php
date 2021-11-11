@@ -9,6 +9,11 @@ class Grado_persona extends CI_Controller{
     {
         parent::__construct();
         $this->load->model('Grado_persona_model');
+        if ($this->session->userdata('logged_in')) {
+            $this->session_data = $this->session->userdata('logged_in');
+        }else {
+            redirect('', 'refresh');
+        }
     } 
 
     /*
