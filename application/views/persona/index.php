@@ -69,8 +69,8 @@
 							<td><?= $p['persona_celular']; ?></td>
 							<td><?= $p['persona_direccion']; ?></td>
 							<td>
-								<a href="<?php echo site_url('persona/edit/'.$p['persona_id']); ?>" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> Edit</a> 
-								<a href="<?php echo site_url('persona/remove/'.$p['persona_id']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span> Delete</a>
+								<a href="<?php echo site_url('persona/edit/'.$p['persona_id']); ?>" class="btn btn-info btn-xs" title="Editar"><span class="fa fa-pencil"></span></a> 
+								<!-- <a href="<?php echo site_url('persona/remove/'.$p['persona_id']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span> Delete</a> -->
 							</td>
 						</tr>
 						<?php 

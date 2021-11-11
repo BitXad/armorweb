@@ -88,4 +88,16 @@ class Persona_model extends CI_Model
 
         return $persona;
     }
+
+    function buscar_personas($parametro){
+        return $this->db->query(
+            "SELECT p.*, a.arma_codigo
+            from persona p
+            left join arma a on p.persona_id = a.persona_id 
+            where 
+            p.persona_nombre like '%$parametro%'
+            or p.persona_apellido like '%$parametro%'
+            or a.arma_codigo like '%$parametro%'"
+        )->result_array();
+    }
 }

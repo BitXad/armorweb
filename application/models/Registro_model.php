@@ -35,17 +35,14 @@ class Registro_model extends CI_Model
      */
     function get_all_registro()
     {
-        $registro = $this->db->query("
-            SELECT
-                *
-
-            FROM
-                `registro`
-
-            WHERE
-                1 = 1
-
-            ORDER BY `registro_id` DESC
+        $registro = $this->db->query(
+        "SELECT r.*, p.persona_apellido,p.persona_nombre , a.arma_codigo, tp.tipo_descripcion, ta.tipoarma_descripcion 
+        from registro r 
+        left join persona p on r.persona_id = p.persona_id 
+        left join arma a on r.arma_id = a.arma_id
+        left join tipo_arma ta on ta.tipoarma_id =a.tipoarma_id 
+        left join tipo_persona tp on tp.tipo_id = p.tipo_id 
+        where 1 = 1
         ")->result_array();
 
         return $registro;
