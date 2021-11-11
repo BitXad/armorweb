@@ -10,6 +10,11 @@ class Registro extends CI_Controller{
         parent::__construct();
         $this->load->model('Persona_model');
         $this->load->model('Registro_model');
+        if ($this->session->userdata('logged_in')) {
+            $this->session_data = $this->session->userdata('logged_in');
+        }else {
+            redirect('', 'refresh');
+        }
     } 
 
     /*
