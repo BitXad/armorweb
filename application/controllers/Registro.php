@@ -8,6 +8,7 @@ class Registro extends CI_Controller{
     function __construct()
     {
         parent::__construct();
+        $this->load->model('Persona_model');
         $this->load->model('Registro_model');
     } 
 
@@ -111,6 +112,12 @@ class Registro extends CI_Controller{
         }
         else
             show_error('The registro you are trying to delete does not exist.');
+    }
+
+    function buscar_personas(){
+        $parametro = $this->input->post("parametro");
+        $lista = $this->Persona_model->buscar_personas($parametro);
+        echo json_encode($lista);
     }
     
 }
