@@ -28,7 +28,8 @@ class Arma extends CI_Controller{
     function add()
     {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('arma_codigo','Arma Codigo','required');
+        $this->form_validation->set_rules('arma_numorden','Num. orden','trim|required', array('required' => 'Este Campo no debe ser vacio'));
+        $this->form_validation->set_rules('arma_codigo','Código','trim|required', array('required' => 'Este Campo no debe ser vacio'));
         if($this->form_validation->run())
         {
             /* *********************INICIO imagen***************************** */

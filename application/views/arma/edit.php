@@ -8,33 +8,9 @@
                 <div class="box-body">
                     <div class="row clearfix">
                         <div class="col-md-3">
-                            <label for="tipoarma_id" class="control-label">Tipo de Arma</label>
+                            <label for="arma_numorden" class="control-label"><span class="text-danger">*</span>Num. Orden</label>
                             <div class="form-group">
-                                <select name="tipoarma_id" class="form-control">
-                                    <option value="">select tipo_arma</option>
-                                    <?php 
-                                    foreach($all_tipo_arma as $tipo_arma)
-                                    {
-                                        $selected = ($tipo_arma['tipoarma_id'] == $arma['tipoarma_id']) ? ' selected="selected"' : "";
-                                        echo '<option value="'.$tipo_arma['tipoarma_id'].'" '.$selected.'>'.$tipo_arma['tipoarma_descripcion'].'</option>';
-                                    } 
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="persona_id" class="control-label">Persona</label>
-                            <div class="form-group">
-                                <select name="persona_id" class="form-control">
-                                    <option value="">select persona</option>
-                                    <?php 
-                                    foreach($all_persona as $persona)
-                                    {
-                                        $selected = ($persona['persona_id'] == $arma['persona_id']) ? ' selected="selected"' : "";
-                                        echo '<option value="'.$persona['persona_id'].'" '.$selected.'>'.$persona['persona_apellido'].' '.$persona['persona_nombre'].'</option>';
-                                    } 
-                                    ?>
-                                </select>
+                                <input type="text" name="arma_numorden" value="<?php echo ($this->input->post('arma_numorden') ? $this->input->post('arma_numorden') : $arma['arma_numorden']); ?>" class="form-control" id="arma_numorden" />
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -42,12 +18,6 @@
                             <div class="form-group">
                                 <input type="text" name="arma_codigo" value="<?php echo ($this->input->post('arma_codigo') ? $this->input->post('arma_codigo') : $arma['arma_codigo']); ?>" class="form-control" id="arma_codigo" />
                                 <span class="text-danger"><?php echo form_error('arma_codigo');?></span>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="arma_numorden" class="control-label">Num. Orden</label>
-                            <div class="form-group">
-                                <input type="text" name="arma_numorden" value="<?php echo ($this->input->post('arma_numorden') ? $this->input->post('arma_numorden') : $arma['arma_numorden']); ?>" class="form-control" id="arma_numorden" />
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -103,8 +73,23 @@
                             <div class="form-group">
                                 <input type="text" name="arma_responsable" value="<?php echo ($this->input->post('arma_responsable') ? $this->input->post('arma_responsable') : $arma['arma_responsable']); ?>" class="form-control" id="arma_responsable" />
                             </div>
-                            </div>
+                        </div>
                         <div class="col-md-3">
+                            <label for="tipoarma_id" class="control-label">Tipo de Arma</label>
+                            <div class="form-group">
+                                <select name="tipoarma_id" class="form-control">
+                                    <!--<option value="">select tipo_arma</option>-->
+                                    <?php 
+                                    foreach($all_tipo_arma as $tipo_arma)
+                                    {
+                                        $selected = ($tipo_arma['tipoarma_id'] == $arma['tipoarma_id']) ? ' selected="selected"' : "";
+                                        echo '<option value="'.$tipo_arma['tipoarma_id'].'" '.$selected.'>'.$tipo_arma['tipoarma_descripcion'].'</option>';
+                                    } 
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
                             <label for="arma_foto" class="control-label">Foto</label>
                             <div class="form-group">
                                 <input type="file" name="arma_foto" value="<?php echo ($this->input->post('arma_foto') ? $this->input->post('arma_foto') : $arma['arma_foto']); ?>" class="form-control" id="arma_foto" accept="image/png, image/jpeg, jpg, image/gif" />
@@ -112,10 +97,25 @@
                             </div>
                         </div>
                         <div class="col-md-3">
+                            <label for="persona_id" class="control-label">Asignar a</label>
+                            <div class="form-group">
+                                <select name="persona_id" class="form-control">
+                                    <option value="">- Elegir persona -</option>
+                                    <?php 
+                                    foreach($all_persona as $persona)
+                                    {
+                                        $selected = ($persona['persona_id'] == $arma['persona_id']) ? ' selected="selected"' : "";
+                                        echo '<option value="'.$persona['persona_id'].'" '.$selected.'>'.$persona['persona_apellido'].' '.$persona['persona_nombre'].'</option>';
+                                    } 
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
                             <label for="usuario_id" class="control-label">Usuario</label>
                             <div class="form-group">
                                 <select name="usuario_id" class="form-control">
-                                    <option value="">select usuario</option>
+                                    <!--<option value="">select usuario</option>-->
                                     <?php 
                                     foreach($all_usuario as $usuario)
                                     {
@@ -130,7 +130,7 @@
                             <label for="estado_id" class="control-label">Estado</label>
                             <div class="form-group">
                                 <select name="estado_id" class="form-control">
-                                    <option value="">select estado</option>
+                                    <!--<option value="">select estado</option>-->
                                     <?php 
                                     foreach($all_estado as $estado)
                                     {
