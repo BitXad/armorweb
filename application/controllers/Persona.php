@@ -248,5 +248,21 @@ class Persona extends CI_Controller{
         else
             show_error('The persona you are trying to delete does not exist.');
     }
+    /* busca personas desde modulo salida de armas */
+    function buscarpersonas()
+    {
+        if ($this->input->is_ajax_request()) {
+            $parametro = $this->input->post('parametro');   
+            if($parametro!=""){
+                $datos = $this->Persona_model->buscar_personasparametro($parametro);            
+                echo json_encode($datos);
+            }
+            else echo json_encode(null);
+        }
+        else
+        {                 
+            show_404();
+        }
+    }
     
 }

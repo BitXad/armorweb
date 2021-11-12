@@ -100,4 +100,19 @@ class Persona_model extends CI_Model
             or a.arma_codigo like '%$parametro%'"
         )->result_array();
     }
+    /* busca personas por: nombre, apellido o c.i. */
+    function buscar_personasparametro($filtro)
+    {
+        $persona = $this->db->query(
+        "SELECT p.*, g.grado_descripcion, t.tipo_descripcion
+            FROM persona p
+            left join grado_persona g on p.grado_id = g.grado_id
+            left join tipo_persona t on p.tipo_id = t.tipo_id
+            WHERE
+                p.estado_id = 1 and
+                (p.persona_nombre like '%".$filtro."%' or p.persona_apellido like '%".$filtro."%' or p.persona_ci like '%".$filtro."%')
+            order by p.persona_apellido asc, p.persona_nombre asc
+        ")->result_array();
+        return $persona;
+    }
 }
