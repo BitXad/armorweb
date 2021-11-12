@@ -32,6 +32,36 @@ class Arma extends CI_Controller{
     }
 
     /*
+     * Listing of arma
+     */
+    function inventario()
+    {
+        if ($this->session->userdata('logged_in')) {
+            $data['arma'] = $this->Arma_model->get_all_inventario();
+
+            $data['_view'] = 'arma/inventario';
+            $this->load->view('layouts/main',$data);
+        }else {
+            redirect('', 'refresh');
+        }
+    }
+
+    /*
+     * Listing of arma
+     */
+    function prestamos_activos()
+    {
+        if ($this->session->userdata('logged_in')) {
+            $data['arma'] = $this->Arma_model->get_all_prestamos_activos();
+
+            $data['_view'] = 'arma/prestamos_activos';
+            $this->load->view('layouts/main',$data);
+        }else {
+            redirect('', 'refresh');
+        }
+    }
+
+    /*
      * Adding a new arma
      */
     function add()

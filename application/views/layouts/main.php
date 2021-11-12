@@ -129,13 +129,13 @@
                                 
                                 <li>
                                     <a href="<?php echo site_url('arma');?>">
-                                        <i class="fa fa-legal"></i> <span>Arma</span>
+                                        <i class="fa fa-legal"></i> <span>Armamento</span>
                                     </a>
                                 </li>
 
                                 <li>
                                     <a href="<?php echo site_url('persona');?>">
-                                        <i class="fa fa-address-book-o"></i> <span>Persona</span>
+                                        <i class="fa fa-address-book-o"></i> <span>Personal</span>
                                     </a>
                                 </li>
                                 
@@ -156,6 +156,38 @@
                                 <li>
                                     <a href="<?php echo site_url('grado_persona');?>">
                                         <i class="fa fa-fire"></i> <span>Grados</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="<?php echo site_url('tipo_arma');?>">
+                                        <i class="fa fa-codepen"></i> <span>Tipo de Arma</span>
+                                    </a>
+                                </li>
+                                
+                                <li>
+                                    <a href="<?php echo site_url('tipo_persona');?>">
+                                        <i class="fa fa-group"></i> <span>Tipo Persona</span>
+                                    </a>
+                                </li>
+
+                                
+                            </ul>
+                        </li>
+                        
+                        <li>
+                            <a href="#"><i class="fa fa-paperclip"></i> <span>Reportes</span></a>
+                            <ul class="treeview-menu">
+                                
+                                <li>
+                                    <a href="<?php echo site_url('arma/inventario');?>">
+                                        <i class="fa fa-chain-broken"></i> <span>Inventario</span>
+                                    </a>
+                                </li>
+                                
+                                <li>
+                                    <a href="<?php echo site_url('arma/prestamos_activos');?>">
+                                        <i class="fa fa-fire"></i> <span>Prestamos activos</span>
                                     </a>
                                 </li>
 
