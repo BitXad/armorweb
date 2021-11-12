@@ -57,15 +57,97 @@ function tablarepersona(){
 }
 
 function repopersona(persona){
+    var base_url = document.getElementById('base_url').value;
     $("#lapersona_id").val(persona['persona_id']);
-    $("#cliente_nombre").val(cliente_nombre);
+    $("#lafoto").html("<img src='"+base_url+"/resources/images/personas/"+persona['persona_foto']+"' width='90' height='90' >");
+    $("#elnombre").html(persona['grado_descripcion']+" "+persona['persona_apellido']+" "+persona['persona_nombre']);
+    $("#elci").html(persona['persona_ci']);
+    $("#eltelefono").html(persona['persona_telefono']+" - "+persona['persona_celular']);
+    $("#ladireccion").html(persona['persona_direccion']);
     $("#buscar_lapersona").val("");
     $("#tablarepersona").html("");
     $('#modalbuscarpersona').modal('hide');
 }
 
+function validarcodigo(e){
+    tecla = (document.all) ? e.keyCode : e.which;  
+    if (tecla==13){ 
+        buscarcodigo_arma();
+    }
+}
 
+function buscarcodigo_arma(){
+    var base_url = document.getElementById('base_url').value;
+    var controlador = base_url+'salida_armamento/buscar_porcodigo';
+    var codigo = document.getElementById('codigo').value;
+    document.getElementById('oculto').style.display = 'block'; //mostrar el bloque del loader
+    
+    $.ajax({url: controlador,
+           type:"POST",
+           data:{codigo:codigo},
+           success:function(respuesta){
+               res = JSON.parse(respuesta);
+                    if (res.length>0){
+                        
+                         if (res[0].existencia > 0){
+                             
+                            if (res[0].producto_codigobarra == codigo){
+                                factor = 1;
+                                precio = res[0].producto_precio;
+                                factor_nombre = "";
+                            }
+                            
+                            if (res[0].producto_codigofactor == codigo){
+                                factor = res[0].producto_factor;
+                                precio = res[0].producto_preciofactor;
+                                factor_nombre = "producto_factor";
+                            }
+                            
+                           
+                            //html = "<input type='text' value='"+factor+"' id='select_factor"+res[0].producto_id+"' title='select_factor"+res[0].producto_id+"'>"
+                            
+                            precio_unidad = precio; //res[0]["producto_precio"];
+                            
+                            html = "";
+                            html += "   <select class='btn btn-facebook' style='font-size:12px; font-family: Arial; padding:0; background: black;' id='select_factor"+res[0]["producto_id"]+"' name='select_factor"+res[0]["producto_id"]+"' onchange='mostrar_saldo("+JSON.stringify(res[0])+")'>";
+                            html += "       <option value='"+factor_nombre+"'>";                            
+                            html += "           "+res[0]["producto_unidad"]+" "+res[0]["moneda_descripcion"]+": "+precio_unidad.fixed(2)+"";
+                            html += "       </option>";
+                            html += "       </select>";
 
+                            $("#selector").html(html);
+                            
+                            ingresorapidojs2(factor, res[0]); 
+                            //ingresorapidojs(factor,res[0]);
+                         }
+                         else{    
+                             alert('No existe la cantidad requerida en inventario...!');
+                         }
+                         
+                     }
+                     else {alert('El producto no se encuentra registrado con el código especificado...!!'); }
+
+           },
+           error:function(respuesta){
+               alert('ERROR: no existe el producto con el codigo seleccionado o no tiene existencia en inventario...!!');
+               
+               $("#codigo").select();
+
+           },
+            complete: function (respuesta) {
+               if (respuesta==null){
+                    alert('El producto no se encuentra registrado o se encuentra agostado en inventario..!!!');
+                }              
+             document.getElementById('oculto').style.display = 'none'; //ocultar el bloque del loader
+              $("#codigo").select();
+              
+            }
+        });
+           
+        
+    document.getElementById('oculto').style.display = 'none'; //ocultar el bloque del loader
+
+}
 
 
 

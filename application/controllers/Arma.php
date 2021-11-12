@@ -126,12 +126,11 @@ class Arma extends CI_Controller{
                 }
                 /* *********************FIN imagen***************************** */
                 $usuario_id = $this->session_data['usuario_id'];
-                $estado_id = 1;
                 $params = array(
                     'tipoarma_id' => $this->input->post('tipoarma_id'),
                     'persona_id' => $this->input->post('persona_id'),
                     'usuario_id' => $usuario_id,
-                    'estado_id' => $estado_id,
+                    'estado_id' => $this->input->post('persona_id'),
                     'arma_numorden' => $this->input->post('arma_numorden'),
                     'arma_codigo' => $this->input->post('arma_codigo'),
                     'arma_fechaingreso' => $this->input->post('arma_fechaingreso'),
@@ -161,7 +160,8 @@ class Arma extends CI_Controller{
                 $data['all_usuario'] = $this->Usuario_model->get_all_usuario();
 
                 $this->load->model('Estado_model');
-                $data['all_estado'] = $this->Estado_model->get_all_estado();
+                $tipo = 3;
+                $data['all_estado'] = $this->Estado_model->get_tipo_estado($tipo);
 
                 $data['_view'] = 'arma/add';
                 $this->load->view('layouts/main',$data);
@@ -289,7 +289,8 @@ class Arma extends CI_Controller{
                     $data['all_usuario'] = $this->Usuario_model->get_all_usuario();
 
                     $this->load->model('Estado_model');
-                    $data['all_estado'] = $this->Estado_model->get_all_estado();
+                    $tipo = 3;
+                    $data['all_estado'] = $this->Estado_model->get_tipo_estado($tipo);
 
                     $data['_view'] = 'arma/edit';
                     $this->load->view('layouts/main',$data);
