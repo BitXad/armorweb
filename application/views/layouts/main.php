@@ -93,50 +93,98 @@
                     </div>
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                        <li class="header">MENU</li>
+                        
+                        <li class="header">MENU</li>                        
+                                                
                         <li>
                             <a href="<?php echo site_url('registro');?>">
                                 <i class="fa fa-dashboard"></i> <span>Inicio</span>
                             </a>
                         </li>
+                        
+                        
                         <li>
-                            <a href="<?php echo site_url('arma');?>">
-                                <i class="fa fa-legal"></i> <span>Arma</span>
-                            </a>
+                            <a href="#"><i class="fa fa-connectdevelop"></i> <span>Operaciones</span></a>
+                            <ul class="treeview-menu">
+                                
+                                <li>
+                                    <a href="<?php echo site_url('arma');?>">
+                                        <i class="fa fa-legal"></i> <span>Salida de Armamento</span>
+                                    </a>
+                                </li>
+                                
+                                <li>
+                                    <a href="<?php echo site_url('arma');?>">
+                                        <i class="fa fa-backward"></i> <span>Ingreso de Armamento</span>
+                                    </a>
+                                </li>
+
+                                
+                            </ul>
                         </li>
+                        
                         <li>
-                            <a href="<?php echo site_url('estado');?>">
-                                <i class="fa fa-chain-broken"></i> <span>Estado</span>
-                            </a>
+                            <a href="#"><i class="fa fa-book"></i> <span>Registro</span></a>
+                            <ul class="treeview-menu">
+                                
+                                <li>
+                                    <a href="<?php echo site_url('arma');?>">
+                                        <i class="fa fa-legal"></i> <span>Arma</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="<?php echo site_url('persona');?>">
+                                        <i class="fa fa-address-book-o"></i> <span>Persona</span>
+                                    </a>
+                                </li>
+                                
+                            </ul>
                         </li>
+                                
+                        
                         <li>
-                            <a href="<?php echo site_url('grado_persona');?>">
-                                <i class="fa fa-fire"></i> <span>Grado Persona</span>
-                            </a>
+                            <a href="#"><i class="fa fa-list-alt"></i> <span>Parametros</span></a>
+                            <ul class="treeview-menu">
+                                
+                                <li>
+                                    <a href="<?php echo site_url('estado');?>">
+                                        <i class="fa fa-chain-broken"></i> <span>Estado</span>
+                                    </a>
+                                </li>
+                                
+                                <li>
+                                    <a href="<?php echo site_url('grado_persona');?>">
+                                        <i class="fa fa-fire"></i> <span>Grados</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="<?php echo site_url('tipo_arma');?>">
+                                        <i class="fa fa-codepen"></i> <span>Tipo de Arma</span>
+                                    </a>
+                                </li>
+                                
+                                <li>
+                                    <a href="<?php echo site_url('tipo_persona');?>">
+                                        <i class="fa fa-group"></i> <span>Tipo Persona</span>
+                                    </a>
+                                </li>
+
+                                
+                            </ul>
                         </li>
-                        <li>
-                            <a href="<?php echo site_url('persona');?>">
-                                <i class="fa fa-address-book-o"></i> <span>Persona</span>
-                            </a>
-                        </li>
-                        <li>
+                                
+                        
+                        
+<!--                        <li>
                             <a href="<?php echo site_url('registro');?>">
                                 <i class="fa fa-address-card-o"></i> <span>Registro</span>
                             </a>
-                        </li>
-                        <li>
-                            <a href="<?php echo site_url('tipo_arma');?>">
-                                <i class="fa fa-codepen"></i> <span>Tipo Arma</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?php echo site_url('tipo_persona');?>">
-                                <i class="fa fa-group"></i> <span>Tipo Persona</span>
-                            </a>
-                        </li>
+                        </li>-->
                         <li>
                             <a href="<?php echo site_url('usuario');?>">
-                                <i class="fa fa-user-circle-o"></i> <span>Usuario</span>
+                                <i class="fa fa-user-circle-o"></i> <span>Usuarios</span>
                             </a>
                         </li>
                     </ul>
