@@ -50,7 +50,7 @@
                     foreach($arma as $a){ ?>
                     <tr>
                         <td><?php echo ($i+1); ?></td>
-                        <td><center> <?php echo "<img src='".site_url()."/resources/images/arma/"."thumb_".$a['arma_foto']."' width='40' height='40' class='img-circle'"; ?></center></td>
+                        <td><center> <?php echo "<img src='".site_url()."/resources/images/arma/"."thumb_".$a['arma_foto']."' width='40' height='40' class='img-circle'>"; ?></center></td>
                         <td><?php echo $a['persona_apellido']." ".$a['persona_nombre']; ?></td>
                         <td><?php echo $a['tipoarma_descripcion']; ?></td>
                         <td><?php echo $a['arma_numorden']; ?></td>
