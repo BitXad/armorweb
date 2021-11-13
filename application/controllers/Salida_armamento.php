@@ -26,102 +26,19 @@ class Salida_armamento extends CI_Controller{
         $data['_view'] = 'salida_armamento/index';
         $this->load->view('layouts/main',$data);
     }
-
-    /*
-     * Adding a new registro
-     */
-    function add()
-    {   
-        if(isset($_POST) && count($_POST) > 0)     
-        {   
-            $params = array(
-				'persona_id' => $this->input->post('persona_id'),
-				'arma_id' => $this->input->post('arma_id'),
-				'registro_fechasalida' => $this->input->post('registro_fechasalida'),
-				'registro_horasalida' => $this->input->post('registro_horasalida'),
-				'registro_fechaingreso' => $this->input->post('registro_fechaingreso'),
-				'registro_horaingreso' => $this->input->post('registro_horaingreso'),
-				'registro_observacion' => $this->input->post('registro_observacion'),
-            );
-            
-            $registro_id = $this->Salida_armamento_model->add_registro($params);
-            redirect('registro/index');
-        }
-        else
-        {
-			$this->load->model('Persona_model');
-			$data['all_persona'] = $this->Persona_model->get_all_persona();
-
-			$this->load->model('Arma_model');
-			$data['all_arma'] = $this->Arma_model->get_all_arma();
-            
-            $data['_view'] = 'registro/add';
-            $this->load->view('layouts/main',$data);
-        }
-    }  
-
-    /*
-     * Editing a registro
-     */
-    function edit($registro_id)
-    {   
-        // check if the registro exists before trying to edit it
-        $data['registro'] = $this->Salida_armamento_model->get_registro($registro_id);
-        
-        if(isset($data['registro']['registro_id']))
-        {
-            if(isset($_POST) && count($_POST) > 0)     
-            {   
-                $params = array(
-					'persona_id' => $this->input->post('persona_id'),
-					'arma_id' => $this->input->post('arma_id'),
-					'registro_fechasalida' => $this->input->post('registro_fechasalida'),
-					'registro_horasalida' => $this->input->post('registro_horasalida'),
-					'registro_fechaingreso' => $this->input->post('registro_fechaingreso'),
-					'registro_horaingreso' => $this->input->post('registro_horaingreso'),
-					'registro_observacion' => $this->input->post('registro_observacion'),
-                );
-
-                $this->Salida_armamento_model->update_registro($registro_id,$params);            
-                redirect('registro/index');
-            }
-            else
-            {
-				$this->load->model('Persona_model');
-				$data['all_persona'] = $this->Persona_model->get_all_persona();
-
-				$this->load->model('Arma_model');
-				$data['all_arma'] = $this->Arma_model->get_all_arma();
-
-                $data['_view'] = 'registro/edit';
-                $this->load->view('layouts/main',$data);
-            }
-        }
-        else
-            show_error('The registro you are trying to edit does not exist.');
-    } 
-
-    /*
-     * Deleting registro
-     */
-    function remove($registro_id)
+    
+    function buscar_porcodigo()  
     {
-        $registro = $this->Salida_armamento_model->get_registro($registro_id);
+        $codigo = $this->input->post('codigo');
+        $this->load->model('Arma_model');
+        $arma = $this->Arma_model->getarma_porcodigo($codigo);
 
-        // check if the registro exists before trying to delete it
-        if(isset($registro['registro_id']))
-        {
-            $this->Salida_armamento_model->delete_registro($registro_id);
-            redirect('registro/index');
-        }
-        else
-            show_error('The registro you are trying to delete does not exist.');
-    }
+        if (sizeof($arma)>0){ //si encontro el producto por el codigo de producto
+            echo json_encode($arma);
+        }else{
+            echo json_encode("no");
+        }            
 
-    function buscar_personas(){
-        $parametro = $this->input->post("parametro");
-        $lista = $this->Persona_model->buscar_personas($parametro);
-        echo json_encode($lista);
     }
     
 }
