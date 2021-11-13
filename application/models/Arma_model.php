@@ -137,7 +137,7 @@ class Arma_model extends CI_Model
                 a.*, p.persona_nombre, p.persona_apellido, t.tipoarma_descripcion,
                 u.usuario_nombre, e.estado_color, e.estado_descripcion, g.grado_descripcion
             FROM
-                arma a
+                inventario a
             left join tipo_arma t on a.tipoarma_id = t.tipoarma_id
             LEFT JOIN persona p on a.persona_id = p.persona_id
             LEFT JOIN usuario u on a.usuario_id = u.usuario_id
@@ -169,6 +169,30 @@ class Arma_model extends CI_Model
             WHERE
                 a.persona_id = '".$persona_id."'
                 and a.estado_id <> 13 
+            ORDER BY a.`arma_id` DESC
+        ")->result_array();
+        return $arma;
+    }
+    
+    /*
+     * Get arma por codigo
+     */
+    function busquedaarma_porpersona($filtro)
+    {
+        $arma = $this->db->query("
+            SELECT
+                a.*, p.persona_nombre, p.persona_apellido, t.tipoarma_descripcion,
+                u.usuario_nombre, e.estado_color, e.estado_descripcion, g.grado_descripcion
+            FROM
+                inventario a
+            left join tipo_arma t on a.tipoarma_id = t.tipoarma_id
+            LEFT JOIN persona p on a.persona_id = p.persona_id
+            LEFT JOIN usuario u on a.usuario_id = u.usuario_id
+            LEFT JOIN estado e on a.estado_id = e.estado_id
+            LEFT JOIN grado_persona g on p.grado_id = g.grado_id
+            WHERE
+                a.estado_id <> 13 
+                and (p.persona_nombre like '%".$filtro."%' or p.persona_apellido like '%".$filtro."%' or p.persona_ci like '%".$filtro."%')
             ORDER BY a.`arma_id` DESC
         ")->result_array();
         return $arma;

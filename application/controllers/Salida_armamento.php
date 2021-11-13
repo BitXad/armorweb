@@ -46,6 +46,7 @@ class Salida_armamento extends CI_Controller{
                                 'arma_id' => $elarma['arma_id'],
                                 'usuario_id' => $usuario_id,
                                 'estado_id' => 5,
+                                'detregistro_observacion' => $elarma['arma_novedades'],
                             );
                             $detregistro_id = $this->Salida_armamento_model->add_detalle_registro_aux($params);
                        /* }
@@ -64,6 +65,7 @@ class Salida_armamento extends CI_Controller{
                                 'arma_id' => $elarma['arma_id'],
                                 'usuario_id' => $usuario_id,
                                 'estado_id' => 5,
+                                'detregistro_observacion' => $elarma['arma_novedades'],
                             );
                             $detregistro_id = $this->Salida_armamento_model->add_detalle_registro_aux($params);
                        /* }
@@ -73,7 +75,7 @@ class Salida_armamento extends CI_Controller{
                 echo json_encode($datos);
             }
         }else{
-            $datos=array("res" => "ok", "persona_id" => 0);
+            $datos=array("res" => "no", "persona_id" => 0);
             echo json_encode($datos);
         }
     }
@@ -135,6 +137,42 @@ class Salida_armamento extends CI_Controller{
         $datos = $this->Salida_armamento_model->get_persona($persona_id);
         echo json_encode($datos);
     }
+    /* registra observaciones de cada detalle al hacer la salida!.. */
+    function registrar_observacion(){
+        $detregistro_id = $this->input->post('detregistro_id');
+        $laobservacion = $this->input->post('laobservacion');
+        $params = array(
+            'detregistro_observacion' => $laobservacion,
+        );
+        $this->Salida_armamento_model->update_detalleregistro_aux($detregistro_id, $params);
+        echo json_encode("ok");
+    }
+    /* busca armas por persona */
+    function buscar_porpersona()  
+    {
+        $filtrar = $this->input->post('filtrar');
+        $this->load->model('Arma_model');
+        $arma = $this->Arma_model->busquedaarma_porpersona($filtrar);
+        if(sizeof($arma)>0){
+            echo json_encode($arma);
+        }else{
+            echo json_encode("no");
+        }
+    }
     
     
+    function registrar_enaux()  
+    {
+        $eldetalle = $this->input->post('eldetalle');
+        $usuario_id = $this->session_data['usuario_id'];
+        
+        $params = array(
+            'arma_id' => $eldetalle['arma_id'],
+            'usuario_id' => $usuario_id,
+            'estado_id' => 5,
+            'detregistro_observacion' => $eldetalle['arma_novedades'],
+        );
+        $detregistro_id = $this->Salida_armamento_model->add_detalle_registro_aux($params);
+        echo json_encode("ok");
+    }
 }

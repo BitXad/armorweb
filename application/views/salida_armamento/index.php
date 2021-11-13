@@ -20,7 +20,7 @@
     <div class="box-tools" style="display: flex">
         <a style="width: 75px; margin-right: 1px; margin-top: 1px" href="<?php echo site_url('persona/add'); ?>" target="_blank" class="btn btn-success btn-foursquarexs" title="Registrar nueva Persona"><font size="5"><span class="fa fa-user-plus"></span></font><br><small>Nueva P.</small></a>
         <a style="width: 75px; margin-right: 1px; margin-top: 1px"href="<?php echo site_url('arma/add'); ?>" target="_blank" class="btn btn-info btn-foursquarexs" title="Registrar nueva Arma" ><font size="5"><span class="fa fa-space-shuttle"></span></font><br><small>Nueva A.</small></a>
-        <a style="width: 75px; margin-right: 1px; margin-top: 1px" href="<?php echo site_url('#'); ?>" target="_blank" class="btn btn-soundcloud btn-foursquarexs" title="Productos con existencia mínima" ><font size="5"><span class="fa fa-file-text-o"></span></font><br><small>Reportes</small></a>
+        <!--<a style="width: 75px; margin-right: 1px; margin-top: 1px" href="<?php //echo site_url('#'); ?>" target="_blank" class="btn btn-soundcloud btn-foursquarexs" title="Reportes" ><font size="5"><span class="fa fa-file-text-o"></span></font><br><small>Reportes</small></a>-->
         <!--<a style="width: 75px; margin-right: 1px; margin-top: 1px" data-toggle="modal" data-target="#modalprecio" class="btn btn-soundcloud btn-foursquarexs" title="Codigo de Barras" ><font size="5"><span class="fa fa-barcode"></span></font><br><small>Cod. Barras</small></a>-->
     </div>
 </div>
@@ -87,14 +87,22 @@
     <div class="col-md-8" style="padding-left: 2px; padding-right: 0px">
         <label for="nombre_persona" class="control-label color_fff">Nombre/Apellidos/C.I.</label>
         <div class="input-group">
-            <span class="input-group-addon" onclick="ocultar_busqueda();"> 
+            <span class="input-group-addon"> 
                 Buscar 
             </span>           
-            <input id="filtrar" type="text" class="form-control" placeholder="Ingrese el nombre, apellido, c.i..." onkeypress="validar(event,4)">
+            <input id="filtrar" name="filtrar" type="text" class="form-control" placeholder="Ingrese el nombre, apellido, c.i..." onkeypress="validarpersona(event)">
         </div>
     </div>
-    <div class="col-md-12" style="padding: 0px">
-        <span id="resultadosalidaizq"></span>
+    <div class="col-md-12" style="padding: 0px;">
+        <table id="mitabla2">
+            <tr>
+                <th>#</th>
+                <th>Descripción</th>
+                <th>Asignado a</th>
+                <th><!--<button class="btn btn-success btn-xs" onclick="registrartodo()" title="Pasar todo el detalle"><i class="text-bold" >>></i></button>--></th>
+            </tr>
+            <tbody class="buscari" id="resultadosalidaizq"></tbody>
+        </table>
     </div>
 </div>
 <div class="col-md-7" style="padding: 0px">
@@ -104,7 +112,7 @@
             <span class="input-group-addon" onclick="ocultar_busqueda();"> 
                 Buscar 
             </span>           
-                <input id="filtrar" type="text" class="form-control" placeholder="Ingrese el código"">
+                <input id="filtrarderecha" type="text" class="form-control" placeholder="Ingrese el código"">
         </div>
     </div>
     <div class="col-md-12" style="padding-left: 3px; padding-right: 0px">
@@ -121,13 +129,13 @@
     </div>
     <div class=" text-center col-md-12" style="padding-left: 3px; padding-right: 0px">
         <br>
-        <a href="#" data-toggle="modal" onclick="registrar_salida()" class="btn btn-sq-lg btn-success" style="width: 110px !important; height:120px !important;">
+        <a href="#" onclick="registrar_salida()" class="btn btn-sq-lg btn-success" style="width: 110px !important; height:120px !important;">
             <i class="fa fa-check fa-4x"></i><br><br>Registrar<br>
         </a>
-        <a href="#" data-toggle="modal" onclick="focus_efectivo()" class="btn btn-sq-lg btn-danger" style="width: 110px !important; height:120px !important;">
-            <i class="fa fa-times fa-4x"></i><br><br>Cancelar<br>
+        <a href="<?php echo site_url('registro'); ?>" class="btn btn-sq-lg btn-danger" style="width: 110px !important; height:120px !important;">
+            <i class="fa fa-times fa-4x"></i><br><br>Salir<br>
         </a>
-</div>
+    </div>
 </div>
 
 

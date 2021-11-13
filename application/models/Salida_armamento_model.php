@@ -115,7 +115,14 @@ class Salida_armamento_model extends CI_Model
         return $registro;
     }
     
-    
+    /*
+     * function to update detalle_regsitro_aux
+     */
+    function update_detalleregistro_aux($detregistro_id,$params)
+    {
+        $this->db->where('detregistro_id',$detregistro_id);
+        return $this->db->update('detalle_registro_aux',$params);
+    }
     
     
     

@@ -98,7 +98,9 @@ function buscarcodigo_arma(){
                 var lapersona_id = resultado.persona_id;
                 if (registros != null){
                     if (registros == "no"){
-                        alert("El arma con ese codigo no esta registrado en el sistema o ya fue dado de baja!.");
+                        alert("El arma con ese codigo ya se registro su salida o no esta registrado en el sistema o ya fue dado de baja!.");
+                        $("#codigo").val("");
+                        $("#codigo").focus();
                         document.getElementById('loader_arma').style.display = 'none';
                     }else{
                         if(lapersona_id >0){
@@ -148,9 +150,10 @@ function get_detalle_registro_aux(){
                         }
                         html += "</td>";
                         html += "<td>";
-                        html += registros[i]["arma_novedades"];
+                        html += "<input style='width: 100% !important' onkeypress='validarobservacion(event, "+JSON.stringify(registros[i]["detregistro_id"])+")' id='observacion"+registros[i]["detregistro_id"]+"' name='observacion"+registros[i]["detregistro_id"]+"' value='"+registros[i]["detregistro_observacion"]+"'>";
                         html += "</td>";
                         html += "<td>";
+                        html += "<button type='button' onclick='registrar_observacion("+JSON.stringify(registros[i]["detregistro_id"])+")' class='btn btn-success btn-xs'><i class='fa fa-save'></i></button>";
                         html += "<button type='button' onclick='eliminardetalle_aux("+JSON.stringify(registros[i]["detregistro_id"])+")' class='btn btn-danger btn-xs'><i class='fa fa-times'></i></button>";
                         html += "</td>";
                         html += "</tr>";
@@ -241,6 +244,7 @@ function registrar_salida(){
                     document.getElementById('loader_arma').style.display = 'none';
                     get_detalle_registro_aux();
                     limpiar_infpersona();
+                    window.open(base_url+"registro/imprimir_factura_id/"+factura_id, '_blank');
                 }else{
                     document.getElementById('loader_arma').style.display = 'none';
                 }
@@ -296,4 +300,125 @@ function limpiar_infpersona(){
     //$("#buscar_lapersona").val("");
     //$("#tablarepersona").html("");
     //$('#modalbuscarpersona').modal('hide');
+}
+
+function registrar_observacion(detregistro_id){
+    var base_url = document.getElementById('base_url').value;
+    var laobservacion = document.getElementById('observacion'+detregistro_id).value;
+    var controlador = base_url+'salida_armamento/registrar_observacion';
+    document.getElementById('loader_arma').style.display = 'block'; //mostrar el bloque del loader
+    
+    $.ajax({url: controlador,
+            type:"POST",
+            data:{detregistro_id:detregistro_id, laobservacion:laobservacion},
+            success:function(respuesta){
+                //$("#encontrados").val("- 0 -");
+                var registros =  JSON.parse(respuesta);
+                
+                if (registros != null){
+                    get_detalle_registro_aux();
+                }else{
+                    document.getElementById('loader_arma').style.display = 'none';
+                }
+            },
+            error:function(respuesta){
+               // alert("Algo salio mal...!!!");
+               html = "";
+               $("#resultadosalidader").html(html);
+            }
+    });
+}
+
+function validarobservacion(e, detregistro_id){
+    tecla = (document.all) ? e.keyCode : e.which;  
+    if (tecla==13){ 
+        registrar_observacion(detregistro_id);
+    }
+}
+
+function validarpersona(e){
+    tecla = (document.all) ? e.keyCode : e.which;  
+    if (tecla==13){ 
+        buscararma_porpersona();
+    }
+}
+
+function buscararma_porpersona(){
+    var base_url = document.getElementById('base_url').value;
+    var controlador = base_url+'salida_armamento/buscar_porpersona';
+    var filtrar = document.getElementById('filtrar').value;
+    document.getElementById('loader_arma').style.display = 'block'; //mostrar el bloque del loader
+    
+    $.ajax({url: controlador,
+            type:"POST",
+            data:{filtrar:filtrar},
+            success:function(respuesta){
+                //$("#encontrados").val("- 0 -");
+                var registros =  JSON.parse(respuesta);
+                if (registros != null){
+                    if (registros == "no"){
+                        alert("La persona que busca no essta registrado en el sistema o ya fue dado de baja!.");
+                        $("#filtrar").val("");
+                        $("#filtrar").focus();
+                        document.getElementById('loader_arma').style.display = 'none';
+                    }else{
+                        var n = registros.length; //tama«Ðo del arreglo de la consulta
+                        //$("#encontrados").val("- "+n+" -");
+                        html = "";
+                        for (var i = 0; i < n ; i++){
+                            html += "<tr>";
+                            html += "<td class='text-center'>"+1+"</td>";
+                            html += "<td>";
+                            html += registros[i]['tipoarma_descripcion']+"<br>";
+                            html += "<small>"+registros[i]['arma_codigo']+"</small>";
+                            html += "</td>";
+                            html += "<td>";
+                            if(registros[i]['persona_id']>0){
+                                html += registros[i]["grado_descripcion"]+" "+registros[i]["persona_apellido"]+" "+registros[i]["persona_nombre"];
+                            }
+                            html += "</td>";
+                            html += "<td>";
+                            html += "<button type='button' onclick='registrar_aaux("+JSON.stringify(registros[i])+")' class='btn btn-success btn-xs' title='Pasar a detalle'><i class='text-bold'>></i></button>";
+                            html += "</td>";
+                            html += "</tr>";
+                        }
+                        $("#resultadosalidaizq").html(html);
+                        document.getElementById('loader_arma').style.display = 'none';
+                   }
+                }else{
+                    document.getElementById('loader_arma').style.display = 'none';
+                }
+            },
+            error:function(respuesta){
+               // alert("Algo salio mal...!!!");
+               html = "";
+               $("#resultadosalidaizq").html(html);
+            }
+    });
+}
+/* regitra lo que se encontro en la izquierda al detalle aux... */
+function registrar_aaux(eldetalle){
+    var base_url = document.getElementById('base_url').value;
+    var controlador = base_url+'salida_armamento/registrar_enaux';
+    var filtrar = document.getElementById('filtrar').value;
+    document.getElementById('loader_arma').style.display = 'block'; //mostrar el bloque del loader
+    
+    $.ajax({url: controlador,
+            type:"POST",
+            data:{eldetalle:eldetalle},
+            success:function(respuesta){
+                //$("#encontrados").val("- 0 -");
+                var registros =  JSON.parse(respuesta);
+                if (registros != null){
+                    get_detalle_registro_aux();
+                }else{
+                    document.getElementById('loader_arma').style.display = 'none';
+                }
+            },
+            error:function(respuesta){
+               // alert("Algo salio mal...!!!");
+               html = "";
+               $("#resultadosalidaizq").html(html);
+            }
+    });
 }
