@@ -107,4 +107,37 @@ class Registro_model extends CI_Model
         return $this->db->query($sql)->result_array();   
              
     }
+    
+    function get_historial($persona_id, $arma_id)
+    {
+        $sql = "SELECT 
+                r.*,
+                d.*,
+                a.*,
+                e.estado_descripcion,
+                p.*,
+                t.tipoarma_descripcion,
+                ee.estado_descripcion as estado_arma,
+                e.estado_descripcion as estado_prestamo,
+                u.usuario_nombre
+              FROM
+                registro r
+                
+                LEFT OUTER JOIN detalle_registro d ON (d.registro_id = r.registro_id)
+                LEFT OUTER JOIN persona p ON (p.persona_id = r.registro_id)
+                LEFT OUTER JOIN estado e ON (e.estado_id = r.estado_id)
+                LEFT OUTER JOIN arma a ON (a.arma_id = d.arma_id)
+                LEFT OUTER JOIN tipo_arma t ON (t.tipoarma_id = a.tipoarma_id)
+                LEFT OUTER JOIN estado ee ON (ee.estado_id = a.estado_id)
+                LEFT OUTER JOIN usuario u ON (u.usuario_id = r.usuario_id)
+
+
+              WHERE
+                p.persona_id = ".$persona_id.
+                " and a.arma_id = ".$arma_id.
+                " order by r.registro_fechasalida desc";
+        
+        return $this->db->query($sql)->result_array();   
+             
+    }
 }

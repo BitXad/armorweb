@@ -190,6 +190,12 @@
                                         <i class="fa fa-fire"></i> <span>Prestamos activos</span>
                                     </a>
                                 </li>
+                                
+                                <li>
+                                    <a href="<?php echo site_url('registro/reimpresion');?>">
+                                        <i class="fa fa-print"></i> <span>Re-impresión</span>
+                                    </a>
+                                </li>
 
                                 <li>
                                     <a href="<?php echo site_url('tipo_arma');?>">

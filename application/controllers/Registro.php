@@ -158,5 +158,53 @@ class Registro extends CI_Controller{
         }
     }
     
+    /*
+     * Listing of registro
+     */
+    function reimpresion()
+    {
+        //$data['registro'] = $this->Registro_model->get_all_registro();
+        
+        $data['_view'] = 'registro/reimpresion';
+        $this->load->view('layouts/main',$data);
+    }
+    
+    
+    /*
+     * Listing of registro
+     */
+    function reimprimir()
+    {
+        //$data['registro'] = $this->Registro_model->get_all_registro();
+        $registro_id = $this->input->post('registro_id');
+        $opcion = $this->input->post('num_opcion');
+        //$data['_view'] = 'registro/reimpresion';
+        //$this->load->view('layouts/main',$data);
+        
+        if ($this->session->userdata('logged_in')) {
+            
+            if($opcion==1){
+                $data['registro'] = $this->Registro_model->get_comprobante($registro_id);
+                $data['empresa'] = $this->Empresa_model->get_empresa(1);
+
+                $data['_view'] = 'registro/comprobantepres';
+                $this->load->view('layouts/main',$data);
+                
+            }else{
+                
+                $data['registro'] = $this->Registro_model->get_comprobante($registro_id);
+                $data['empresa'] = $this->Empresa_model->get_empresa(1);
+
+                $data['_view'] = 'registro/comprobantedev';
+                $this->load->view('layouts/main',$data);
+            }
+            
+        
+        }else {
+            redirect('', 'refresh');
+        }
+        
+        
+    }    
     
 }
