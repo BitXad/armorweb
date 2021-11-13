@@ -213,7 +213,7 @@ border-bottom : 1px solid #aaa;
                         <th style="background-color: #aaa !important; -webkit-print-color-adjust: exact;" nowrap >FECHA<br>DEVOLUCIÓN</th>
                         <th style="background-color: #aaa !important; -webkit-print-color-adjust: exact;" nowrap >ESTADO</th>
                         <th style="background-color: #aaa !important; -webkit-print-color-adjust: exact;" nowrap >PRESTAMO</th>
-                        <th style="background-color: #aaa !important; -webkit-print-color-adjust: exact;" nowrap >OBSERV</th>
+                        <th style="background-color: #aaa !important; -webkit-print-color-adjust: exact;" nowrap >OBSERV    </th>
                     </tr>
 
                     <?php $num = 0; 
