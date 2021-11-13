@@ -10,6 +10,7 @@ class Registro extends CI_Controller{
         parent::__construct();
         $this->load->model('Persona_model');
         $this->load->model('Registro_model');
+        $this->load->model('Empresa_model');
         if ($this->session->userdata('logged_in')) {
             $this->session_data = $this->session->userdata('logged_in');
         }else {
@@ -124,5 +125,38 @@ class Registro extends CI_Controller{
         $lista = $this->Persona_model->buscar_personas($parametro);
         echo json_encode($lista);
     }
+    
+    /*
+     * Comprobante de registro
+     */
+    function comprobantepres($registro_id)
+    {
+        if ($this->session->userdata('logged_in')) {
+            $data['registro'] = $this->Registro_model->get_comprobante($registro_id);
+            $data['empresa'] = $this->Empresa_model->get_empresa(1);
+
+            $data['_view'] = 'registro/comprobantepres';
+            $this->load->view('layouts/main',$data);
+        }else {
+            redirect('', 'refresh');
+        }
+    }
+    
+    /*
+     * Comprobante de registro
+     */
+    function comprobantedev($registro_id)
+    {
+        if ($this->session->userdata('logged_in')) {
+            $data['registro'] = $this->Registro_model->get_comprobante($registro_id);
+            $data['empresa'] = $this->Empresa_model->get_empresa(1);
+
+            $data['_view'] = 'registro/comprobantedev';
+            $this->load->view('layouts/main',$data);
+        }else {
+            redirect('', 'refresh');
+        }
+    }
+    
     
 }
