@@ -79,16 +79,24 @@ class Arma_model extends CI_Model
      */
     function get_all_prestamos_activos()
     {
-        $sql = "
-                select * 
-                from registro r,arma a, persona p, tipo_arma t, usuario u, estado e
-                where
-                r.persona_id = p.persona_id and
-                r.arma_id = a.arma_id and
-                t.tipoarma_id = a.tipoarma_id and
-                u.usuario_id = r.usuario_id and
-                e.estado_id = r.estado_id and
-                r.estado_id = 5";
+//        $sql = "
+//                select * 
+//                from registro r,arma a, persona p, tipo_arma t, usuario u, estado e
+//                where
+//                r.persona_id = p.persona_id and
+//                r.arma_id = a.arma_id and
+//                t.tipoarma_id = a.tipoarma_id and
+//                u.usuario_id = r.usuario_id and
+//                e.estado_id = r.estado_id and
+//                r.estado_id = 5";
+        
+        $sql = "select p.*, u.usuario_nombre,r.registro_id, r.registro_fechasalida, r.registro_horasalida,
+                e.estado_descripcion
+                from registro r
+                left join persona p on p.persona_id = r.persona_id
+                left join usuario u on u.usuario_id = r.usuario_id
+                left join estado e on e.estado_id = r.estado_id
+                where r.estado_id = 5";
         
         $arma = $this->db->query($sql)->result_array();
         return $arma;
