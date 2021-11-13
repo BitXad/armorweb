@@ -11,6 +11,7 @@ class Registro extends CI_Controller{
         $this->load->model('Persona_model');
         $this->load->model('Registro_model');
         $this->load->model('Empresa_model');
+        $this->load->model('Arma_model');
         if ($this->session->userdata('logged_in')) {
             $this->session_data = $this->session->userdata('logged_in');
         }else {
@@ -125,6 +126,86 @@ class Registro extends CI_Controller{
         $lista = $this->Persona_model->buscar_personas($parametro);
         echo json_encode($lista);
     }
+    function entrega_equipo(){
+        $id=$this->input->post('id');
+        $observacion = $this->input->post('observacion');
+        $params = array(
+            'registro_fechaingreso' => date('Y-m-d'),
+            'registro_horaingreso' => date('H:i:s'),
+            'registro_observacion' => $observacion,
+        );
+        $registro = $this->Registro_model->update_registro($id,$params);
+    }
+
+    function imprimir($registro_id){
+        $data['registro'] = $this->Registro_model->get_registro_impresion($registro_id);
+        // $data['all_persona'] = $this->Persona_model->get_all_persona();
+        // $this->load->model('Arma_model');
+        // $data['all_arma'] = $this->Arma_model->get_all_arma();
+
+        $data['_view'] = 'registro/nota_preimpreso_carta';
+        $this->load->view('layouts/main',$data);
+    }
+
+    function devolucion(){
+        $data['registro'] = $this->Registro_model->get_all_registro();
+        
+        $data['_view'] = 'registro/devolucion';
+        $this->load->view('layouts/main',$data);
+    }
+
+    function get_all_registros(){
+        $persona_id = $this->input->post('persona_id');
+        $respuesta = $this->Registro_model->get_all_registros($persona_id);
+        echo json_encode($respuesta);
+    }
+    function get_detalle_registro(){
+        $registro_id = $this->input->post('registro_id');
+        $resultado = $this->Registro_model->get_all_detalleregistro($registro_id);
+        echo json_encode($resultado);
+    }
+    function arma_registrada(){
+        if ($this->input->is_ajax_request()) {
+            $detregistro_id = $this->input->post("detalle_registro");
+            $params = array(
+                'estado_id'=> 8,
+                'detregistro_fechadevolucion' => date('Y-m-d'),
+                'detregistro_horadevolucion' => date('H:i:s'),
+            );
+            $this->Registro_model->update_detregistro($detregistro_id,$params); 
+        }
+    }
+    function guardar_registro(){
+        if ($this->input->is_ajax_request()){
+            $persona_id = $this->input->post("persona");
+            $registro_id = $this->input->post("registro");
+            $detregistros = $this->input->post("detregistros");
+            foreach ($detregistros as $dr) {
+                $parmas2 = array(
+                    "detregistro_observacion"=>$dr['detregistro_observacion'],
+                    "detregistro_devuelto"=>$dr['detregistro_devuelto'],
+                );
+                $this->Registro_model->update_detregistro($dr['detregistro_id'],$parmas2);
+            }
+
+            $params = array(
+                "estado_id" => 8,
+            );
+            $this->Registro_model->update_registro($registro_id,$params);
+            
+            $this->comprobantedev($registro_id);
+        }
+    }
+
+    function get_armas_pendientes_entrega(){
+        if ($this->input->is_ajax_request()){
+            $persona_id = $this->input->post("persona_id");
+            $resultado = $this->Registro_model->get_armas_pendientes_entregar($persona_id);
+            echo json_encode($resultado);
+        }else{
+            show_404();
+        }
+    }
     
     /*
      * Comprobante de registro
@@ -207,4 +288,24 @@ class Registro extends CI_Controller{
         
     }    
     
+    function get_detalle_registro2(){
+        if ($this->input->is_ajax_request()){
+            $detregistro_id = $this->input->post("detregistro_id");
+            echo json_encode($this->Registro_model->get_detalle_registro2($detregistro_id));
+        }
+    }
+    function guardar_arma($detregistro_id){
+        // if(isset($_POST) && count($_POST) > 0){ 
+            $registro = $this->Registro_model->get_detalle_registro2($detregistro_id);
+            $params = array(
+                'detregistro_observacion' => $this->input->post('modal_observaciones'),
+                'detregistro_devuelto' => $this->input->post('modal_devuelto'),
+                'detregistro_fechadevolucion' => date('Y-m-d'),
+                'detregistro_horadevolucion' => date('H:i:s'),
+                'estado_id' => 8,
+            );
+            $this->Registro_model->update_detregistro($detregistro_id,$params);
+            $this->comprobantedev($registro['registro_id']);
+        // }
+    }
 }

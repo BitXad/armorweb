@@ -114,7 +114,7 @@
                                 </li>
                                 
                                 <li>
-                                    <a href="<?php echo site_url('arma');?>">
+                                    <a href="<?php echo site_url('registro/devolucion');?>">
                                         <i class="fa fa-backward"></i> <span>Ingreso de Armamento</span>
                                     </a>
                                 </li>

@@ -140,4 +140,78 @@ class Registro_model extends CI_Model
         return $this->db->query($sql)->result_array();   
              
     }
+
+    function get_registro_impresion($registro_id){
+        return $this->db->query(
+            "SELECT r.*, p.*, a.*,ta.tipoarma_descripcion, tp.tipo_descripcion 
+            from registro r 
+            left join persona p on r.persona_id = p.persona_id 
+            left join arma a on r.arma_id = a.arma_id 
+            left join tipo_arma ta on a.tipoarma_id = ta.tipoarma_id 
+            left join tipo_persona tp on tp.tipo_id = p.tipo_id 
+            where 1=1
+            and r.registro_id = $registro_id"
+        )->row_array();
+    }
+
+    function get_all_registros($persona_id){
+        return $this->db->query(
+            "SELECT r.*, e.estado_color
+            from registro r 
+            left join persona p on r.persona_id = p.persona_id
+            left join estado e on r.estado_id = e.estado_id 
+            where 1=1
+            and r.estado_id = 7
+            and r.persona_id = $persona_id"
+        )->result_array();
+    }
+
+    function get_all_detalleregistro($registro_id){
+        return $this->db->query(
+            "SELECT dr.*, a.*,p.*,ta.tipoarma_descripcion,r.registro_id,r.registro_fechasalida,r.registro_horasalida, e.estado_color
+            from detalle_registro dr 
+            left join registro r on dr.registro_id = r.registro_id 
+            left join persona p on p.persona_id = r.persona_id 
+            left join arma a on dr.arma_id = a.arma_id
+            left join tipo_arma ta on ta.tipoarma_id = a.tipoarma_id 
+            left join estado e on dr.estado_id = e.estado_id 
+            where 1=1
+            and dr.registro_id = $registro_id
+            order by a.arma_codigo asc"
+        )->result_array();
+    }
+
+    function update_detregistro($detregistro_id, $params){
+        $this->db->where('detregistro_id',$detregistro_id);
+        return $this->db->update('detalle_registro',$params);
+    }
+
+    function get_armas_pendientes_entregar($persona_id){
+        return $this->db->query(
+            "SELECT dr.*,r.*, a.arma_codigo , ta.tipoarma_descripcion 
+            from detalle_registro dr 
+            left join arma a on dr.arma_id = a.arma_id 
+            left join registro r on dr.registro_id = r.registro_id 
+            left join estado e on dr.estado_id  = e.estado_id 
+            left join persona p on r.persona_id  = p.persona_id 
+            left join tipo_arma ta on a.tipoarma_id = ta.tipoarma_id 
+            where 1=1
+            and r.estado_id = 8
+            and dr.estado_id = 7
+            and p.persona_id = $persona_id"
+        )->result_array();
+    }
+    function get_detalle_registro2($detregistro_id){
+        return $this->db->query(
+            "SELECT dr.*,r.*,a.arma_codigo,a.arma_foto, ta.tipoarma_descripcion,p.*
+            from detalle_registro dr 
+            left join arma a on  dr.arma_id = a.arma_id 
+            left join registro r on r.registro_id = dr.registro_id 
+            left join persona p on p.persona_id = r.persona_id 
+            left join tipo_arma ta on a.tipoarma_id = ta.tipoarma_id 
+            where 1=1
+            and dr.detregistro_id  = $detregistro_id"
+        )->result_array();
+    }
+
 }

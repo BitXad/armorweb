@@ -115,4 +115,16 @@ class Persona_model extends CI_Model
         ")->result_array();
         return $persona;
     }
+
+    function get_info_persona($ci){
+        return $this->db->query(
+            "SELECT p.*, tp.tipo_descripcion ,gp.grado_descripcion, e.estado_descripcion 
+            from persona p 
+            left join tipo_persona tp on p.tipo_id = tp.tipo_id
+            left join grado_persona gp ON gp.grado_id = p.grado_id 
+            left join estado e on p.estado_id = e.estado_id 
+            where 1 = 1
+            and p.persona_ci = $ci"
+        )->row_array();
+    }
 }

@@ -1,9 +1,9 @@
 <input type="text" value="<?php echo base_url(); ?>" id="base_url" hidden>
 <div class="row">
     <div class="col-md-12">
-      	<div class="box box-info">
+    	<div class="box box-info">
             <div class="box-header with-border">
-              	<h3 class="box-title">Agregar registro</h3>
+				<h3 class="box-title">Agregar registro</h3>
             </div>
 			<!-- <div class="box-body">
           		<div class="row clearfix">
@@ -12,9 +12,7 @@
 						<div class="form-group">
 							<input type="search" name="persona_nombre" list="listapersonas" class="form-control" id="persona_nombre" value="" onchange="buscar_personas()" onKeyUp="this.value = this.value.toUpperCase();" autocomplete="off" />
 							<datalist id="listapersonas">
-
 							</datalist>
-							
 						</div>
 					</div>
 
@@ -26,24 +24,40 @@
 					</div>
 					<hr class="col-md-12">
 					<div class="col-md-6">
-						<div class="row">
+						<table width="100%">
+							<thead>
+								<tr>
+									<th>CODIGO</th>
+									<th>CATEOGORIA</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
 						<?php foreach($all_arma as $arma){ ?>
-							<div class="col-md-10">
-								<span><b>Cod.:</b> <?= $arma['arma_codigo'] ?></span>
-							</div>
-							<div class="col-md-2">
-								<button class="btn btn-sm btn-primary" onclick="llevar($arma['arma_id'])"><i class="fa fa-plus" aria-hidden="true"></i></button>
-							</div>
-						<?php } ?>
-						</div>
+								<tr id="arma<?= $arma['arma_id'] ?>">
+									<td>
+										<span><b>Cod.:</b> <?= $arma['arma_codigo'] ?></span>
+									</td>
+									<td>
+										<span><?= $arma['tipoarma_descripcion'] ?></span>
+									</td>
+									<td>
+										<button class="btn btn-xs btn-primary" onclick="llevar($arma['arma_id'],$arma['arma_codigo'],$arma['tipoarma_descripcion'])"><i class="fa fa-plus" aria-hidden="true"></i></button>
+									</td>
+								</tr>
+								<?php } ?>
+							</tbody>
+						</table>
 					</div>
 					<div class="col-md-6">
-						<div id="armas_espera"></div>
+						<table width="100%">
+							<tbody id="armas_espera"></tbody>
+						</table>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			
-			 -->
+			
             <?php echo form_open('registro/add'); ?>
           	<div class="box-body">
           		<div class="row clearfix"></div>
@@ -145,8 +159,27 @@
 		});
 	}
 
-	function llevar(){
+	function llevar(arma_id,codigo,descripcion){
+		var tr_arma = document.getElementById(`arma${arma_id}`).value;
+		var id  = `arma${arma_id}`;
+		ocultar(id);
+		var html = `<tr>
+						<td>
+							<span><b>Cod.:</b> ${codigo}</span>
+						</td>
+						<td>
+							<span>${descripcion}</span>
+						</td>
+						<td>
+							<button class="btn btn-xs btn-success" title="Agregar imagen"><i class="fa fa-picture-o" aria-hidden="true"></i></button>
+							<button class="btn btn-xs btn-danger" title="Borrar" onclick="mostrar(${arma_id})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+						</td>
+					</tr>`;
+		$('#armas_espera').html(html);
+	}
 
+	function ocultar(id){
+		document.getElementById(id).style.display = none;
 	}
 	
 </script> -->

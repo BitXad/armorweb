@@ -265,4 +265,13 @@ class Persona extends CI_Controller{
         }
     }
     
+    function buscar_persona(){
+        if($this->input->is_ajax_request()){
+            $ci = $this->input->post('ci');
+            $result = $this->Persona_model->get_info_persona($ci);
+            echo json_encode($result);
+        }else{
+            show_404();
+        }
+    }
 }
