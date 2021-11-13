@@ -12,6 +12,125 @@ class Salida_armamento_model extends CI_Model
     }
     
     /*
+     * function to add new detalle_registro
+     */
+    function add_detalle_registro($params)
+    {
+        $this->db->insert('detalle_registro',$params);
+        return $this->db->insert_id();
+    }
+    
+    /*
+     * function to add new detalle_registro_aux
+     */
+    function add_detalle_registro_aux($params)
+    {
+        $this->db->insert('detalle_registro_aux',$params);
+        return $this->db->insert_id();
+    }
+    
+    function get_all_detalleregistro_aux($usuario_id)
+    {
+        $registro = $this->db->query(
+        "SELECT a.*, dr.*, p.persona_apellido, p.persona_nombre,
+                a.arma_codigo, tp.tipo_descripcion, ta.tipoarma_descripcion,
+                gp.grado_descripcion
+            from detalle_registro_aux dr 
+            left join arma a on dr.arma_id = a.arma_id
+            left join persona p on a.persona_id = p.persona_id 
+            left join tipo_arma ta on ta.tipoarma_id =a.tipoarma_id 
+            left join tipo_persona tp on p.tipo_id = tp.tipo_id 
+            left join grado_persona gp on p.grado_id = gp.grado_id 
+            where
+            dr.usuario_id = $usuario_id
+        ")->result_array();
+        return $registro;
+    }
+    
+    /*
+     * function to delete detalleregistro aux dado un usuario_id
+     */
+    function delete_detalleregistro_aux($usuario_id)
+    {
+        return $this->db->delete('detalle_registro_aux',array('usuario_id'=>$usuario_id));
+    }
+    
+    /*
+     * function to delete detalleregistro aux dado un usuario_id
+     */
+    function delete_undetalleregistro_aux($detregistro_id)
+    {
+        return $this->db->delete('detalle_registro_aux',array('detregistro_id'=>$detregistro_id));
+    }
+    
+    /*
+     * verifica detalle_registro dado arma_id
+     */
+    /*function verificar_salida($arma_id)
+    {
+        $registro = $this->db->query("
+            SELECT
+                detregistro_id
+            FROM
+                `detalle_registro`
+            WHERE
+                arma_id = $arma_id
+                and estado_id <> 6 
+        ")->row_array();
+        return $registro;
+    }*/
+    
+    /*
+     * verifica detalle_registro dado arma_id
+     */
+    /*function verificar_salidaaux($arma_id)
+    {
+        $registro = $this->db->query("
+            SELECT
+                detregistro_id
+            FROM
+                `detalle_registro_aux`
+            WHERE
+                arma_id = $arma_id
+                and estado_id <> 6 
+        ")->row_array();
+        return $registro;
+    }*/
+    
+    /*
+     * Get registro by registro_id
+     */
+    function get_persona($persona_id)
+    {
+        $registro = $this->db->query("
+            SELECT p.*, g.grado_descripcion, t.tipo_descripcion
+            FROM persona p
+            left join grado_persona g on p.grado_id = g.grado_id
+            left join tipo_persona t on p.tipo_id = t.tipo_id
+            WHERE
+                p.estado_id = 1 and
+                p.persona_id = $persona_id
+        ")->result_array();
+
+        return $registro;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
      * Get registro by registro_id
      */
     function get_registro($registro_id)
@@ -66,11 +185,5 @@ class Salida_armamento_model extends CI_Model
         return $this->db->update('registro',$params);
     }
     
-    /*
-     * function to delete registro
-     */
-    function delete_registro($registro_id)
-    {
-        return $this->db->delete('registro',array('registro_id'=>$registro_id));
-    }
+    
 }

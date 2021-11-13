@@ -69,6 +69,11 @@
         </tr>
     </table>
 </div>
+<div class="row no-print" id='loader_arma'  style='display:none;'>
+    <center>
+        <img src="<?php echo base_url("resources/images/loader.gif"); ?>"  >        
+    </center>
+</div>
 <div class="col-md-5" style="padding: 0px">
     <div class="col-md-4" style="padding: 0px">
         <label for="codigo_arma" class="control-label color_fff">Código Arma</label>
@@ -76,10 +81,10 @@
             <span class="input-group-addon"> 
                 <i class="fa fa-barcode"></i>
             </span>           
-            <input type="text" name="codigo" id="codigo" class="form-control" placeholder="código" onkeyup="validarcodigo(event)">
+            <input type="text" name="codigo" id="codigo" class="form-control" placeholder="código" onkeyup="validarcodigo(event)" autofocus>
         </div>
     </div>
-    <div class="col-md-8" style="padding-right: 0px">
+    <div class="col-md-8" style="padding-left: 2px; padding-right: 0px">
         <label for="nombre_persona" class="control-label color_fff">Nombre/Apellidos/C.I.</label>
         <div class="input-group">
             <span class="input-group-addon" onclick="ocultar_busqueda();"> 
@@ -89,11 +94,11 @@
         </div>
     </div>
     <div class="col-md-12" style="padding: 0px">
-        <span id="resultadosalida"></span>
+        <span id="resultadosalidaizq"></span>
     </div>
 </div>
 <div class="col-md-7" style="padding: 0px">
-    <div class="col-md-12" style="padding-left: 3px">
+    <div class="col-md-12" style="padding-left: 3px; padding-right: 0px">
         <label for="nombre_persona" class="control-label color_fff">&nbsp;</label>
         <div class="input-group">
             <span class="input-group-addon" onclick="ocultar_busqueda();"> 
@@ -102,8 +107,28 @@
                 <input id="filtrar" type="text" class="form-control" placeholder="Ingrese el código"">
         </div>
     </div>
+    <div class="col-md-12" style="padding-left: 3px; padding-right: 0px">
+        <table id="mitabla2">
+            <tr>
+                <th>#</th>
+                <th>Descripción</th>
+                <th>Asignado a</th>
+                <th>Observación</th>
+                <th><button class="btn btn-danger btn-xs" onclick="quitartodo()"><i class="fa fa-trash" title="Quitar todo el detalle"></i></button></th>
+            </tr>
+            <tbody class="buscard" id="resultadosalidader"></tbody>
+        </table>
+    </div>
+    <div class=" text-center col-md-12" style="padding-left: 3px; padding-right: 0px">
+        <br>
+        <a href="#" data-toggle="modal" onclick="registrar_salida()" class="btn btn-sq-lg btn-success" style="width: 110px !important; height:120px !important;">
+            <i class="fa fa-check fa-4x"></i><br><br>Registrar<br>
+        </a>
+        <a href="#" data-toggle="modal" onclick="focus_efectivo()" class="btn btn-sq-lg btn-danger" style="width: 110px !important; height:120px !important;">
+            <i class="fa fa-times fa-4x"></i><br><br>Cancelar<br>
+        </a>
 </div>
-
+</div>
 
 
 
@@ -127,10 +152,10 @@
             </div>
             <div class="modal-body" style="padding-bottom: 0px !important">
                 <div class="row no-print" id='loader_bpersona'  style='display:none;'>
-                <center>
-                    <img src="<?php echo base_url("resources/images/loader.gif"); ?>"  >        
-                </center>
-            </div>
+                    <center>
+                        <img src="<?php echo base_url("resources/images/loader.gif"); ?>"  >        
+                    </center>
+                </div>
                 <!------------------------------------------------------------------->
                 <div class="col-md-12 no-print" id="tablarepersona"></div>
                 <!------------------------------------------------------------------->

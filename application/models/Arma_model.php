@@ -127,15 +127,39 @@ class Arma_model extends CI_Model
         $arma = $this->db->query("
             SELECT
                 a.*, p.persona_nombre, p.persona_apellido, t.tipoarma_descripcion,
-                u.usuario_nombre, e.estado_color, e.estado_descripcion
+                u.usuario_nombre, e.estado_color, e.estado_descripcion, g.grado_descripcion
             FROM
                 arma a
             left join tipo_arma t on a.tipoarma_id = t.tipoarma_id
             LEFT JOIN persona p on a.persona_id = p.persona_id
             LEFT JOIN usuario u on a.usuario_id = u.usuario_id
             LEFT JOIN estado e on a.estado_id = e.estado_id
+            LEFT JOIN grado_persona g on p.grado_id = g.grado_id
             WHERE
                 a.arma_codigo = '".$codigo."'
+                and a.estado_id <> 13 
+            ORDER BY a.`arma_id` DESC
+        ")->result_array();
+        return $arma;
+    }
+    /*
+     * Get armas de una persona
+     */
+    function getarmas_porpersona($persona_id)
+    {
+        $arma = $this->db->query("
+            SELECT
+                a.*, p.persona_nombre, p.persona_apellido, t.tipoarma_descripcion,
+                u.usuario_nombre, e.estado_color, e.estado_descripcion, g.grado_descripcion
+            FROM
+                arma a
+            left join tipo_arma t on a.tipoarma_id = t.tipoarma_id
+            LEFT JOIN persona p on a.persona_id = p.persona_id
+            LEFT JOIN usuario u on a.usuario_id = u.usuario_id
+            LEFT JOIN estado e on a.estado_id = e.estado_id
+            LEFT JOIN grado_persona g on p.grado_id = g.grado_id
+            WHERE
+                a.persona_id = '".$persona_id."'
                 and a.estado_id <> 13 
             ORDER BY a.`arma_id` DESC
         ")->result_array();
