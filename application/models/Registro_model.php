@@ -94,7 +94,7 @@ class Registro_model extends CI_Model
                 
                 LEFT OUTER JOIN detalle_registro d ON (d.registro_id = r.registro_id)
                 LEFT OUTER JOIN persona p ON (p.persona_id = r.registro_id)
-                LEFT OUTER JOIN estado e ON (e.estado_id = r.estado_id)
+                LEFT OUTER JOIN estado e ON (e.estado_id = d.estado_id)
                 LEFT OUTER JOIN arma a ON (a.arma_id = d.arma_id)
                 LEFT OUTER JOIN tipo_arma t ON (t.tipoarma_id = a.tipoarma_id)
                 LEFT OUTER JOIN estado ee ON (ee.estado_id = a.estado_id)

@@ -305,7 +305,7 @@ class Registro extends CI_Controller{
                 'estado_id' => 8,
             );
             $this->Registro_model->update_detregistro($detregistro_id,$params);
-            $this->comprobantedev($registro['registro_id']);
+            $this->comprobantedev($registro[0]['registro_id']);
         // }
     }
 }
