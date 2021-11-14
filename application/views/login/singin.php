@@ -78,11 +78,13 @@
         <div class="login-head">
             <br>
             <br>
-          <!--<center>
-              <font size="5" face="Arial black"><b><?php /*echo $empresa[0]["empresa_nombre"] ?></b></font><br>              
-                <img src="<?php echo base_url('resources/images/empresas/'.$empresa[0]["empresa_imagen"].'');*/ ?>"  style="width:80px;height:80px">
-                <br><font size="4" face="Arial black"><b>Ximpleman</b></font>
-          </center>-->
+          <center>
+              <font size="6" face="Arial black" style="color:#005983;"><b>ArmorWeb ver 1.0</b></font><br>
+              <font size="3" face="Arial" style="color:#005983;"><b>Sistema de control de armamento</b></font><br>
+              
+                <img src="<?php echo base_url('resources/images/empresa/'.$empresa[0]["empresa_imagen"].''); ?>"  style="width:80px;height:80px">
+                <br><font size="3" face="Arial black"><b><?php echo $empresa[0]["empresa_nombre"]; ?></b></font>
+          </center>
         </div>
         <div class="login-block">
             <!--                <form>-->
@@ -128,7 +130,7 @@
     <p>All Rights Reserved © <?php $fecha = date('Y'); echo $fecha; ?> Password SRL | Design by  <a href="http://www.passwordbolivia.com/" target="_blank">Password SRL</a> </p>
 </div>-->
 <!--COPY rights end here-->
-<!--
+
 <div class="footer" style="background-color: #000">
     
         <div class="container"> <br> </div>
@@ -138,7 +140,7 @@
                 <div class="col-md-3 w3_footer_grid">
                     <center>
                         <a href="<?php echo base_url("website/ximpleman"); ?>" target="_BLANK" >
-                            <img src="<?php echo base_url("resources/web/images/logo.png"); ?>" width="50%" height="50%">
+                            <img src="<?php echo base_url("resources/images/logo.png"); ?>" width="50%" height="10%">
                         </a>
                     </center>
                 </div>
@@ -156,7 +158,7 @@
                 <div class="col-md-3 w3_footer_grid">
                     <center>
                         <a href="<?php echo base_url("website/password"); ?>" target="_BLANK" >
-                        <img src="<?php echo base_url("resources/web/images/logo_password.png"); ?>" width="50%" height="50%">
+                        <img src="<?php echo base_url("resources/images/logo_password.png"); ?>" width="50%" height="10%">
                         </a>
                     </center>
                 </div>
@@ -165,4 +167,4 @@
         </div>
         
         <div class="container"> <br> </div>
-    </div>-->
+    </div>

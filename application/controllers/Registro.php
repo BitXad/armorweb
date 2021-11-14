@@ -25,8 +25,10 @@ class Registro extends CI_Controller{
     function index()
     {
         $data['registro'] = $this->Registro_model->get_all_registro();
+        $this->load->model('empresa_model');
+        $data['empresa'] = $this->empresa_model->get_empresa(1);
         
-        $data['_view'] = 'registro/index';
+        $data['_view'] = 'dashboard';
         $this->load->view('layouts/main',$data);
     }
 

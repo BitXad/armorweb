@@ -10,6 +10,9 @@ Class Login extends CI_Controller {
     public function index() {
         $licencia = "SELECT DATEDIFF(licencia_fechalimite, CURDATE()) as dias FROM licencia WHERE licencia_id = 1";
         $lice = $this->db->query($licencia)->row_array();
+        
+        $this->load->model('empresa_model');
+        $data['empresa'] = $this->empresa_model->get_empresa(1);
 
         if ($lice['dias'] <= 10) {
             $data['diaslic'] = $lice['dias'];
