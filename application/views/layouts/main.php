@@ -226,6 +226,7 @@
                             </a>
                         </li>
                     </ul>
+                    <!--<img src="<?php echo base_url("resources/images/empresa").$empresa[0]["empresa_foto"]; ?>">-->
                 </section>
                 <!-- /.sidebar -->
             </aside>

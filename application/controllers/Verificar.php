@@ -10,6 +10,7 @@ class Verificar extends CI_Controller
         $this->load->library('form_validation');
         $this->load->library('session');
         $this->load->model('login_model');
+        $this->load->model('empresa_model');
         //$this->load->model('rol_model');
         //$this->load->model('Dosificacion_model');
     }
