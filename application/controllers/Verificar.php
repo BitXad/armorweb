@@ -10,6 +10,7 @@ class Verificar extends CI_Controller
         $this->load->library('form_validation');
         $this->load->library('session');
         $this->load->model('login_model');
+        $this->load->model('empresa_model');
         //$this->load->model('rol_model');
         //$this->load->model('Dosificacion_model');
     }
@@ -29,6 +30,9 @@ class Verificar extends CI_Controller
                     $laimagen = $result->usuario_imagen;
                 }
                 
+                    $this->load->model('empresa_model');
+                    $emp = $this->empresa_model->get_empresa(1);
+                    
                 $sess_array = array(
                     'usuario_login' => $result->usuario_login,
                     'usuario_id' => $result->usuario_id,
@@ -40,6 +44,9 @@ class Verificar extends CI_Controller
                     'usuario_email' => $result->usuario_email,
                     'usuario_clave' => $result->usuario_clave,
                     'thumb' => $thumb,
+                    'empresa_imagen' => $emp[0]['empresa_imagen'],
+                    'empresa_nombre' => $emp[0]['empresa_nombre'],
+                    'empresa_eslogan' => $emp[0]['empresa_eslogan']
                     //'rol' => $rolusuario,
                     //'codigo' => $this->get_codigo_empresa()
                 );
@@ -103,6 +110,10 @@ class Verificar extends CI_Controller
                         $thumb = "thumb_".$result->usuario_imagen;
                         //$thumb = $this->foto_thumb($result->usuario_imagen);
                     }
+                    
+                    $this->load->model('empresa_model');
+                    $emp = $this->empresa_model->get_empresa(1);
+        
                     $rolusuario = $this->Rol_usuario_model->getall_rolusuario($result->tipousuario_id);
                     $tipousuario_nombre = $this->Tipo_usuario_model->get_tipousuario_nombre($result->tipousuario_id);
                     $sess_array = array(
@@ -117,7 +128,10 @@ class Verificar extends CI_Controller
                         'usuario_clave' => $result->usuario_clave,
                         'thumb' => $thumb,
                         'rol' => $rolusuario,
-                        'codigo' => $this->get_codigo_empresa()
+                        'codigo' => $emp[0]['empresa_codigo'],  //$this->get_codigo_empresa()
+                        'empresa_imagen' => $emp[0]['empresa_imagen'],  //$this->get_codigo_empresa()
+                        'empresa_nombre' => $emp[0]['empresa_nombre'],  //$this->get_codigo_empresa()
+                        'empresa_eslogan' => $emp[0]['empresa_eslogan']  //$this->get_codigo_empresa()
                     );
                     
                     $this->session->set_userdata('logged_in', $sess_array);
