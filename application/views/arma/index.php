@@ -67,7 +67,7 @@
                         <td><?php echo $a['estado_descripcion']; ?></td>
                         <td>
                             <a href="<?php echo site_url('arma/edit/'.$a['arma_id']); ?>" class="btn btn-info btn-xs" title="Modifica Tipo de Arma"><span class="fa fa-pencil"></span></a> 
-                            <!-- <a href="<?php //echo site_url('arma/remove/'.$a['arma_id']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a>-->
+                            <a href="<?php echo site_url('arma/remove/'.$a['arma_id']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a>
                         </td>
                     </tr>
                     <?php

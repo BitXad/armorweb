@@ -170,7 +170,7 @@ class Registro extends CI_Controller{
         if ($this->input->is_ajax_request()) {
             $detregistro_id = $this->input->post("detalle_registro");
             $params = array(
-                'estado_id'=> 8,
+                'estado_id'=> 6,
                 'detregistro_fechadevolucion' => date('Y-m-d'),
                 'detregistro_horadevolucion' => date('H:i:s'),
             );
@@ -191,7 +191,7 @@ class Registro extends CI_Controller{
             }
 
             $params = array(
-                "estado_id" => 8,
+                "estado_id" => 6,
             );
             $this->Registro_model->update_registro($registro_id,$params);
             
@@ -304,10 +304,117 @@ class Registro extends CI_Controller{
                 'detregistro_devuelto' => $this->input->post('modal_devuelto'),
                 'detregistro_fechadevolucion' => date('Y-m-d'),
                 'detregistro_horadevolucion' => date('H:i:s'),
-                'estado_id' => 8,
+                'estado_id' => 6,
             );
+            if (!empty($_FILES['modal_foto1']['name'])){
+                $params2 = array(
+                    'imagen_descripcion' => $this->crear_imagen_arma('modal_foto1'),
+                    'detregistro_id' => $detregistro_id,
+                );
+                $this->Registro_model->add_imagen($params2);
+            }
+            if (!empty($_FILES['modal_foto2']['name'])){
+                $params3 = array(
+                    'imagen_descripcion' => $this->crear_imagen_arma('modal_foto2'),
+                    'detregistro_id' => $detregistro_id,
+                );
+                $this->Registro_model->add_imagen($params3);
+            }
+            if (!empty($_FILES['modal_foto3']['name'])){
+                $params5 = array(
+                    'imagen_descripcion' => $this->crear_imagen_arma('modal_foto3'),
+                    'detregistro_id' => $detregistro_id,
+                );
+                $this->Registro_model->add_imagen($params5);
+            }
+
             $this->Registro_model->update_detregistro($detregistro_id,$params);
-            $this->comprobantedev($registro['registro_id']);
+            $this->comprobantedev($registro[0]['registro_id']);
         // }
+    }
+
+    function crear_imagen_arma($campo,$detregistro_id=""){
+        if($detregistro_id != ""){
+
+        }else{
+
+        }
+        
+        $foto="";
+        if (!empty($_FILES["$campo"]['name'])){
+            $this->load->library('image_lib');
+            $config['upload_path'] = './resources/images/arma/fotos/';
+            $img_full_path = $config['upload_path'];
+
+            $config['allowed_types'] = 'gif|jpeg|jpg|png';
+            $config['max_size'] = 200000;
+            $config['max_width'] = 2900;
+            $config['max_height'] = 2900;
+            
+            $new_name = time(); //str_replace(" ", "_", $this->input->post('proveedor_nombre'));
+            $config['file_name'] = $new_name; //.$extencion;
+            $config['file_ext_tolower'] = TRUE;
+
+            $this->load->library('upload', $config);
+            $this->upload->do_upload("$campo");
+
+            $img_data = $this->upload->data();
+            $extension = $img_data['file_ext'];
+            /* ********************INICIO para resize***************************** */
+            if ($img_data['file_ext'] == ".jpg" || $img_data['file_ext'] == ".png" || $img_data['file_ext'] == ".jpeg" || $img_data['file_ext'] == ".gif") {
+                $conf['image_library'] = 'gd2';
+                $conf['source_image'] = $img_data['full_path'];
+                $conf['new_image'] = './resources/images/arma/fotos/';
+                $conf['maintain_ratio'] = TRUE;
+                $conf['create_thumb'] = FALSE;
+                $conf['width'] = 400;
+                $conf['height'] = 300;
+                $this->image_lib->clear();
+                $this->image_lib->initialize($conf);
+                if(!$this->image_lib->resize()){
+                    echo $this->image_lib->display_errors('','');
+                }
+            }
+            /* ********************F I N  para resize***************************** */
+            $confi['image_library'] = 'gd2';
+            $confi['source_image'] = './resources/images/arma/fotos/'.$new_name.$extension;
+            $confi['new_image'] = './resources/images/arma/fotos/'."thumb_".$new_name.$extension;
+            $confi['create_thumb'] = FALSE;
+            $confi['maintain_ratio'] = TRUE;
+            $confi['width'] = 100;
+            $confi['height'] = 100;
+
+            $this->image_lib->clear();
+            $this->image_lib->initialize($confi);
+            $this->image_lib->resize();
+
+            $foto = $new_name.$extension;
+        }
+        /* *********************FIN imagen***************************** */
+        return $foto;
+    }
+    function guardar_fotos(){
+        if($this->input->is_ajax_request()){
+            $detregistro_id = $this->input->post('detregistro_id');
+            $config = [
+                "upload_path" => "./resources/images/arma/fotos",
+                "allowed_types" => "png|jpg|jpeg|gif"
+            ];
+
+            $this->load->library("upload", $config);
+            $fotos = ['modal2_foto1','modal2_foto2','modal2_foto3'];
+            for ($i=0; $i < sizeof($fotos); $i++) { 
+                if($this->upload->do_upload($fotos[$i])){
+                    $data = array("upload_data" => $this->upload->data());
+                    $params2 = array(
+                        'imagen_descripcion' => $data['upload_data']['file_name'],
+                        'detregistro_id' => $detregistro_id,
+                    );
+                    $this->Registro_model->add_imagen($params2);
+                }else{
+                    echo $this->upload->display_errors();
+                }
+            }
+        }
     }
 }

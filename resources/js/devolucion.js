@@ -3,6 +3,11 @@ document.querySelector("#persona_ci").addEventListener("keyup", event => {
         buscar_ci();
 });
 
+document.querySelector("#buscar_lapersona").addEventListener("keyup", event => {
+    if(event.key == "Enter") 
+        tablarepersona();
+});
+
 document.querySelector("#arma_codigo").addEventListener("keyup", event => {
     if(event.key == "Enter") 
         buscar_arma();
@@ -24,8 +29,14 @@ function get_registro(){
     return actual_registro;
 }
 
-function buscar_ci(){
-    var ci = document.getElementById("persona_ci").value;
+function buscar_ci(persona_ci=""){
+    var ci;
+    if (persona_ci === "") {
+        ci = document.getElementById("persona_ci").value;
+    } else {
+        ci = persona_ci;
+        $('#modalbuscarpersona').modal('hide');
+    }
     var controlador = `${base_url}persona/buscar_persona`
     $.ajax({
         url: controlador,
@@ -123,7 +134,7 @@ function abrir_registro(registro_id){
                                 <input id="det_reg_observacion${res['detregistro_id']}" name="det_reg_observacion${res['detregistro_id']}" type="text" class="form-control" value="Sin novedad">
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-warning" title="Agregar imagenes" onclick="agregar_imagenes(${res['arma_codigo']})"><i class="fa fa-picture-o" aria-hidden="true"></i></button>
+                                <button class="btn btn-sm btn-warning" title="Agregar imagenes" onclick="modal_fotos(${res['detregistro_id']})"><i class="fa fa-picture-o" aria-hidden="true"></i></button>
                             </td>
                             <td>
                                 <input id="det_reg_devuelto${res['detregistro_id']}" name="det_reg_devuelto${res['detregistro_id']}" type="text" class="form-control">
@@ -232,7 +243,6 @@ function armas_pendientes(persona_id){
 }
 
 function modal_entrega(detregistro_id){
-    $('#modal_entregar_arma').modal('show');
     let controlador = `${base_url}registro/get_detalle_registro2`;
     $.ajax({
         url: controlador,
@@ -257,6 +267,79 @@ function modal_entrega(detregistro_id){
     $('#modal_entregar_arma').modal('show');
 }
 
+function modal_fotos(detregistro_id){
+    $('#detregistro_id').val(detregistro_id);
+    $('#modal_foto_arma').modal('show');
+}
+
+function guardar_fotos(detregistro_id){
+    let controlador = `${base_url}registro/guardar_fotos`;
+    let formData = new FormData($("#form-foto-arma")[0]);
+    $.ajax({
+        url: controlador,
+        type: "POST",
+        data:formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success:()=>{
+            console.log("las imagenes se guardaron correctament")
+        },
+        error:()=>{
+            alert("algo salio mal")
+        }
+    });
+    $('#modal_foto_arma').modal('hide');
+}
+
 function limpiar_tabla(tabla){
     $(`#${tabla}`).html = "";
+}
+
+function tablarepersona(){
+    var controlador = `${base_url}persona/buscarpersonas`;
+    var parametro = document.getElementById('buscar_lapersona').value;
+    document.getElementById('loader_bpersona').style.display = 'block';
+    $.ajax({url: controlador,
+            type:"POST",
+            data:{parametro:parametro},
+            success:function(respuesta){
+                //$("#encontrados").val("- 0 -");
+                var registros =  JSON.parse(respuesta);
+                if (registros != null){
+                    // var n = registros.length; //tama«Ðo del arreglo de la consult            
+                    html = `<table class='table table-striped no-print' id='mitabla'>
+                                <tr>
+                                    <th>N</th>
+                                    <th>Cliente</th>
+                                    <th></th>
+                                </tr>
+                                <tbody class='buscar' id='tablarepersona'>`;
+                    let i = 1;
+                    registros.forEach(registro => {
+                        html += `<tr>
+                                    <td class='text-center'>${i}</td>
+                                    <td>
+                                        <div class='col-md-12'>
+                                        <b>${registro["persona_apellido"]} ${registro["persona_nombre"]}</b>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type='button' onclick='buscar_ci(${registro['persona_ci']})' class='btn btn-primary btn-xs'><i class='fa fa-search'></i></button>
+                                    </td>
+                                </tr>`;
+                        i++;
+                    });
+                        html += `</tbody>`
+                   $("#tablarepersona").html(html);
+                   document.getElementById('loader_bpersona').style.display = 'none';
+                }else{
+                    document.getElementById('loader_bpersona').style.display = 'none';
+                }
+            },
+            error:function(respuesta){
+               html = "";
+               $("#tablarepersona").html(html);
+            }
+    });
 }
