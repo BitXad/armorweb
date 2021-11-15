@@ -126,7 +126,7 @@ class Salida_armamento extends CI_Controller{
                 $detregistro_id = $this->Salida_armamento_model->add_detalle_registro($params);
             }
             $this->Salida_armamento_model->delete_detalleregistro_aux($usuario_id);
-            echo json_encode("ok");
+            echo json_encode($registro_id);
         }else{
             echo json_encode("no");
         }

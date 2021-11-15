@@ -108,13 +108,13 @@
                             <ul class="treeview-menu">
                                 
                                 <li>
-                                    <a href="<?php echo site_url('arma');?>">
+                                        <a href="<?php echo site_url('salida_armamento');?>">
                                         <i class="fa fa-legal"></i> <span>Salida de Armamento</span>
                                     </a>
                                 </li>
                                 
                                 <li>
-                                    <a href="<?php echo site_url('arma');?>">
+                                    <a href="<?php echo site_url('registro/devolucion');?>">
                                         <i class="fa fa-backward"></i> <span>Ingreso de Armamento</span>
                                     </a>
                                 </li>
