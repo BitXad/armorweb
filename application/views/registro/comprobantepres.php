@@ -62,9 +62,9 @@ border-collapse : collapse;
 font-family: Arial;
 font-size: 7pt;  
 
+}
 td {
 border:hidden;
-}
 }
 
 td#comentario {
@@ -186,7 +186,7 @@ border-bottom : 1px solid #aaa;
 
                             <tr>
                                 <td style="width: 2cm;"></td>
-                                <td style="width: 5cm; text-align: right; background-color: #aaa !important; -webkit-print-color-adjust: exact;" nowrap><b>SE ENTREGO A: </b></td><td ></td><td style="width: 10cm; background-color: #ddd !important; -webkit-print-color-adjust: exact;"><?php echo $registro[0]['persona_apellido']." ".$registro[0]['persona_nombre']; ?></td>
+                                <td style="width: 5cm; text-align: right; background-color: #aaa !important; -webkit-print-color-adjust: exact;" nowrap><b>SE ENTREGO A: </b></td><td ></td><td style="width: 10cm; background-color: #ddd !important; -webkit-print-color-adjust: exact;"><?php echo strtoupper($registro[0]['grado_descripcion']." ".$registro[0]['persona_apellido']." ".$registro[0]['persona_nombre']); ?></td>
                                 <td style="width: 2cm;"></td>
                             </tr>
                            

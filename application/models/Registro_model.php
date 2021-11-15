@@ -88,7 +88,8 @@ class Registro_model extends CI_Model
                 t.tipoarma_descripcion,
                 ee.estado_descripcion as estado_arma,
                 e.estado_descripcion as estado_prestamo,
-                u.usuario_nombre
+                u.usuario_nombre,
+                gp.grado_descripcion
               FROM
                 registro r
                 
@@ -99,8 +100,7 @@ class Registro_model extends CI_Model
                 LEFT OUTER JOIN tipo_arma t ON (t.tipoarma_id = a.tipoarma_id)
                 LEFT OUTER JOIN estado ee ON (ee.estado_id = a.estado_id)
                 LEFT OUTER JOIN usuario u ON (u.usuario_id = r.usuario_id)
-
-
+                left outer join grado_persona gp on (gp.grado_id = p.grado_id)
               WHERE
                 r.registro_id = ".$registro_id;
         
