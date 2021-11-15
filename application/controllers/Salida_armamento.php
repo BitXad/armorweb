@@ -177,6 +177,7 @@ class Salida_armamento extends CI_Controller{
     {
         $eldetalle = $this->input->post('eldetalle');
         $usuario_id = $this->session_data['usuario_id'];
+        $this->load->model('Arma_model');
         $elarma_enaux = $this->Arma_model->verificar_arma_enaux($eldetalle['arma_id']);
         if(sizeof($elarma_enaux)>0){
             echo json_encode("no");
