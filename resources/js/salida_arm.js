@@ -102,6 +102,11 @@ function buscarcodigo_arma(){
                         $("#codigo").val("");
                         $("#codigo").focus();
                         document.getElementById('loader_arma').style.display = 'none';
+                    }else if(registros == "yahay"){
+                        alert("El arma con ese código ya esta listo para ser prestado!.");
+                        $("#codigo").val("");
+                        $("#codigo").focus();
+                        document.getElementById('loader_arma').style.display = 'none';
                     }else{
                         if(lapersona_id >0){
                             get_persona(lapersona_id);
@@ -357,7 +362,7 @@ function buscararma_porpersona(){
                 var registros =  JSON.parse(respuesta);
                 if (registros != null){
                     if (registros == "no"){
-                        alert("La persona que busca no essta registrado en el sistema o ya fue dado de baja!.");
+                        alert("La persona que busca no esta registrado en el sistema o ya fue dado de baja!.");
                         $("#filtrar").val("");
                         $("#filtrar").focus();
                         document.getElementById('loader_arma').style.display = 'none';
@@ -410,7 +415,12 @@ function registrar_aaux(eldetalle){
                 //$("#encontrados").val("- 0 -");
                 var registros =  JSON.parse(respuesta);
                 if (registros != null){
-                    get_detalle_registro_aux();
+                    if(registros == "no"){
+                        alert("El arma con ese código ya esta listo para ser prestado!.");
+                        document.getElementById('loader_arma').style.display = 'none';
+                    }else{
+                        get_detalle_registro_aux();
+                    }
                 }else{
                     document.getElementById('loader_arma').style.display = 'none';
                 }

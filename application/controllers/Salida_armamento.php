@@ -34,44 +34,56 @@ class Salida_armamento extends CI_Controller{
         $arma = $this->Arma_model->getarma_porcodigo($codigo);
         $usuario_id = $this->session_data['usuario_id'];
         if(sizeof($arma)>0){
-            $persona_id = $arma[0]['persona_id'];
-            if($persona_id > 0){
-                $armas = $this->Arma_model->getarmas_porpersona($persona_id);
-                foreach ($armas as $elarma) {
-                    /*$verificar = $this->Salida_armamento_model->verificar_salida($elarma['arma_id']);
-                    if(!($verificar["detregistro_id"] > 0)){
-                        $verificaraux = $this->Salida_armamento_model->verificar_salidaaux($elarma['arma_id']);
-                        if(!($verificaraux["detregistro_id"] > 0)){*/
-                            $params = array(
-                                'arma_id' => $elarma['arma_id'],
-                                'usuario_id' => $usuario_id,
-                                'estado_id' => 5,
-                                'detregistro_observacion' => $elarma['arma_novedades'],
-                            );
-                            $detregistro_id = $this->Salida_armamento_model->add_detalle_registro_aux($params);
-                       /* }
-                    }*/
-                }
-                $datos=array("res" => "ok", "persona_id" => $persona_id);
+            $elarma_enaux = $this->Arma_model->verificar_arma_enaux($arma[0]['arma_id']);
+            if(sizeof($elarma_enaux)>0){
+                $datos=array("res" => "yahay", "persona_id" => 0);
                 echo json_encode($datos);
-                //echo json_encode("ok"); 
             }else{
-                foreach ($arma as $elarma) {
-                    /*$verificar = $this->Salida_armamento_model->verificar_salida($elarma['arma_id']);
-                    if(!($verificar["detregistro_id"] > 0)){
-                        $verificaraux = $this->Salida_armamento_model->verificar_salidaaux($elarma['arma_id']);
-                        if(!($verificaraux["detregistro_id"] > 0)){*/
-                            $params = array(
-                                'arma_id' => $elarma['arma_id'],
-                                'usuario_id' => $usuario_id,
-                                'estado_id' => 5,
-                                'detregistro_observacion' => $elarma['arma_novedades'],
-                            );
-                            $detregistro_id = $this->Salida_armamento_model->add_detalle_registro_aux($params);
-                       /* }
-                    }*/
+                $lapersona_id = $arma[0]['persona_id'];
+                if($lapersona_id > 0){
+                    $persona_id = $arma[0]['persona_id'];
+                }else{
+                    $persona_id = 0;
                 }
-                $datos=array("res" => "ok", "persona_id" => 0);
+                /*    $armas = $this->Arma_model->getarmas_porpersona($persona_id);
+                    foreach ($armas as $elarma) {
+                        /*$verificar = $this->Salida_armamento_model->verificar_salida($elarma['arma_id']);
+                        if(!($verificar["detregistro_id"] > 0)){
+                            $verificaraux = $this->Salida_armamento_model->verificar_salidaaux($elarma['arma_id']);
+                            if(!($verificaraux["detregistro_id"] > 0)){*/
+                           /*     $params = array(
+                                    'arma_id' => $elarma['arma_id'],
+                                    'usuario_id' => $usuario_id,
+                                    'estado_id' => 5,
+                                    'detregistro_observacion' => $elarma['arma_novedades'],
+                                );
+                                $detregistro_id = $this->Salida_armamento_model->add_detalle_registro_aux($params);
+                           /* }
+                        }*/
+                   /* }
+                    $datos=array("res" => "ok", "persona_id" => $persona_id);
+                    echo json_encode($datos);
+                    //echo json_encode("ok"); 
+                }else{
+                    foreach ($arma as $elarma) {*/
+                        /*$verificar = $this->Salida_armamento_model->verificar_salida($elarma['arma_id']);
+                        if(!($verificar["detregistro_id"] > 0)){
+                            $verificaraux = $this->Salida_armamento_model->verificar_salidaaux($elarma['arma_id']);
+                            if(!($verificaraux["detregistro_id"] > 0)){*/
+                                $params = array(
+                                    'arma_id' => $arma[0]['arma_id'],
+                                    'usuario_id' => $usuario_id,
+                                    'estado_id' => 5,
+                                    'detregistro_observacion' => $arma[0]['arma_novedades'],
+                                );
+                                $detregistro_id = $this->Salida_armamento_model->add_detalle_registro_aux($params);
+                           /* }
+                        }*/
+                    /*}
+                    $datos=array("res" => "ok", "persona_id" => 0);
+                    echo json_encode($datos);
+                }*/
+                $datos=array("res" => "ok", "persona_id" => $persona_id);
                 echo json_encode($datos);
             }
         }else{
@@ -165,14 +177,18 @@ class Salida_armamento extends CI_Controller{
     {
         $eldetalle = $this->input->post('eldetalle');
         $usuario_id = $this->session_data['usuario_id'];
-        
-        $params = array(
-            'arma_id' => $eldetalle['arma_id'],
-            'usuario_id' => $usuario_id,
-            'estado_id' => 5,
-            'detregistro_observacion' => $eldetalle['arma_novedades'],
-        );
-        $detregistro_id = $this->Salida_armamento_model->add_detalle_registro_aux($params);
-        echo json_encode("ok");
+        $elarma_enaux = $this->Arma_model->verificar_arma_enaux($eldetalle['arma_id']);
+        if(sizeof($elarma_enaux)>0){
+            echo json_encode("no");
+        }else{
+            $params = array(
+                'arma_id' => $eldetalle['arma_id'],
+                'usuario_id' => $usuario_id,
+                'estado_id' => 5,
+                'detregistro_observacion' => $eldetalle['arma_novedades'],
+            );
+            $detregistro_id = $this->Salida_armamento_model->add_detalle_registro_aux($params);
+            echo json_encode("ok");
+        }
     }
 }

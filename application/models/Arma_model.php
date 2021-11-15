@@ -215,4 +215,20 @@ class Arma_model extends CI_Model
         return $arma;
     }
     
+    /*
+     * Verificar arma por codigo en detalle_registro_aux
+     */
+    function verificar_arma_enaux($arma_id)
+    {
+        $arma = $this->db->query("
+            SELECT
+                dra.arma_id
+            FROM
+                detalle_registro_aux dra
+            WHERE
+                dra.arma_id = $arma_id
+        ")->result_array();
+        return $arma;
+    }
+    
 }
