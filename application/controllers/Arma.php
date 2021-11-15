@@ -324,4 +324,24 @@ class Arma extends CI_Controller{
         }
     }
     
+
+    /*
+     * Planilla de prestamos
+     */
+    function planilla_prestamos()
+    {
+        if ($this->session->userdata('logged_in')) {
+            
+            $fecha = $this->input->post("fecha_prestamo");
+            
+            $data['arma'] = $this->Arma_model->get_prestamos_fecha($fecha);
+
+            $data['_view'] = 'arma/planilla_prestamos';
+            $this->load->view('layouts/main',$data);
+        }else {
+            redirect('', 'refresh');
+        }
+    }
+
+    
 }

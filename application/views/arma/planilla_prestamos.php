@@ -13,12 +13,20 @@
     });
 </script>
 <link href="<?php echo base_url('resources/css/mitabla.css'); ?>" rel="stylesheet">
+
 <div class="box-header">
-    <font class="color_fff" size='4' face='Arial'><b>Gestión de Armas</b></font>
-    <br><font class="color_fff" size='2' face='Arial'>Registros Encontrados: <?php echo sizeof($arma); ?></font>
-<!--    <div class="box-tools">
-        <a href="<?php echo site_url('arma/add'); ?>" class="btn btn-success btn-sm"><fa class='fa fa-pencil-square-o'></fa>Registrar Armas</a> 
-    </div>-->
+    <font class="color_fff" size='4' face='Arial'><b>Planilla de prestamos</b></font>
+    <br><font class="color_fff" size='2' face='Arial'>Por fecha</font>
+    <div class="box-tools">
+        
+        <?php echo form_open_multipart('arma/planilla_prestamos'); ?>
+        
+            <input type="date" name="fecha_prestamo" class="btn btn-info btn-sm" value="<?php echo date("Y-m-d"); ?>">
+            <button type="submit" class="btn btn-facebook"><i class="fa fa-binoculars"></i> Buscar</button>
+            
+        <?php echo form_close(); ?> 
+            
+    </div>
 </div>
 <div class="row">
     <div class="col-md-12">
@@ -27,13 +35,16 @@
                 <table class="table table-striped" id="mitabla">
                     <tr>
                         <th>#</th>
-                        <th>Foto</th>
+                        <!--<th>Foto</th>-->
                         <th>Oficial</th>
+                        <th>Armamento</th>
+                        <th>Código</th>
                         <th>Salida</th>
-                        <th>Fecha<br>Salida</th>
-                        <th>Hora<br>Salida</th>
+                        <th>Fecha/Hora<br>Salida</th>
+                        <th>Fecha/Hora<br>Devolución</th>
                         <th>Estado</th>
-                        <th></th>
+                        <th>Firma</th>
+                        <th class="no-print"></th>
                     </tr>
                     <tbody class="buscar">
                     <?php
@@ -41,11 +52,13 @@
                     foreach($arma as $a){ ?>
                     <tr>
                         <td><?php echo ($i+1); ?></td>
-                        <td><center> <?php echo "<img src='".site_url()."resources/images/personas/"."thumb_".$a['persona_foto']."' width='40' height='40' class='img-circle'"; ?></center></td>
-                        <td><?php echo $a['persona_apellido']." ".$a['persona_nombre']; ?></td>
+                        <!--<td><center> <?php echo "<img src='".site_url()."resources/images/personas/"."thumb_".$a['persona_foto']."' width='40' height='40' class='img-circle'"; ?></center></td>-->
+                        <td><?php echo $a['grado_descripcion']." ".$a['persona_apellido']." ".$a['persona_nombre']; ?></td>
+                        <td><?php echo $a['tipoarma_descripcion']." ".$a['arma_calibre']; ?></td>
+                        <td><?php echo $a['arma_codigo']; ?></td>
                         <td><?php echo "00".$a['registro_id']; ?></td>
-                        <td><?php echo date("d/m/Y", strtotime($a['registro_fechasalida'])); ?></td>
-                        <td><?php echo "<br>".$a['registro_horasalida']; ?></td>
+                        <td><?php echo date("d/m/Y", strtotime($a['registro_fechasalida']))." ".$a['registro_horasalida']; ?></td>
+                        <td><?php echo date("d/m/Y", strtotime($a['detregistro_fechadevolucion']))." ".$a['detregistro_horadevolucion']; ?></td>
 <!--                        <td><?php echo $a['arma_procedencia']; ?></td>
                         <td><?php echo $a['arma_marca']; ?></td>
                         <td><?php echo $a['arma_calibre']; ?></td>
@@ -55,7 +68,8 @@
                         <td><?php echo $a['arma_responsable']; ?></td>
                         <td><?php echo $a['usuario_nombre']; ?></td>-->
                         <td><?php echo $a['estado_descripcion']; ?></td>
-                        <td>
+                        <td></td>
+                        <td class="no-print">
                             <a href="<?php echo site_url('registro/comprobantedev/'.$a['registro_id']); ?>" class="btn btn-warning btn-xs" title="Prestamos pendientes" target="_BLANK"><span class="fa fa-print"></span></a> 
                             <!-- <a href="<?php //echo site_url('arma/remove/'.$a['arma_id']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></a>-->
                         </td>

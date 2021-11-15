@@ -79,16 +79,6 @@ class Arma_model extends CI_Model
      */
     function get_all_prestamos_activos()
     {
-//        $sql = "
-//                select * 
-//                from registro r,arma a, persona p, tipo_arma t, usuario u, estado e
-//                where
-//                r.persona_id = p.persona_id and
-//                r.arma_id = a.arma_id and
-//                t.tipoarma_id = a.tipoarma_id and
-//                u.usuario_id = r.usuario_id and
-//                e.estado_id = r.estado_id and
-//                r.estado_id = 5";
         
         $sql = "select p.*, u.usuario_nombre,r.registro_id, r.registro_fechasalida, r.registro_horasalida,
                 e.estado_descripcion
@@ -197,4 +187,32 @@ class Arma_model extends CI_Model
         ")->result_array();
         return $arma;
     }
+    
+    /*
+     * Get armas de una persona
+     */
+    function get_prestamos_fecha($fecha)
+    {
+        $sql = "select p.persona_nombre, p.persona_apellido, p.persona_ci, p.persona_telefono, p.persona_celular,
+                r.*, e.estado_descripcion, a.*, t.tipoarma_descripcion, g.grado_descripcion,
+                d.detregistro_fechadevolucion, d.detregistro_horadevolucion
+                from registro r
+
+                left join persona p on p.persona_id = r.persona_id
+                left join usuario u on u.usuario_id = r.usuario_id
+                left join estado e on e.estado_id = r.estado_id
+                left join detalle_registro d on d.registro_id = r.registro_id
+                left join arma a on a.arma_id = d.arma_id
+                left join tipo_arma t on t.tipoarma_id = a.tipoarma_id
+                left join grado_persona g on g.grado_id = p.grado_id
+
+
+                where 
+                r.registro_fechasalida = '".$fecha."'
+                order by r.registro_fechasalida,r.registro_horasalida asc";
+        
+        $arma = $this->db->query($sql)->result_array();
+        return $arma;
+    }
+    
 }

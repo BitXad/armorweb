@@ -108,7 +108,7 @@
                             <ul class="treeview-menu">
                                 
                                 <li>
-                                        <a href="<?php echo site_url('salida_armamento');?>">
+                                    <a href="<?php echo site_url('salida_armamento');?>">
                                         <i class="fa fa-legal"></i> <span>Salida de Armamento</span>
                                     </a>
                                 </li>
@@ -198,16 +198,16 @@
                                 </li>
 
                                 <li>
-                                    <a href="<?php echo site_url('tipo_arma');?>">
-                                        <i class="fa fa-codepen"></i> <span>Tipo de Arma</span>
+                                    <a href="<?php echo site_url('arma/planilla_prestamos');?>">
+                                        <i class="fa fa-codepen"></i> <span>Planilla_prestamos</span>
                                     </a>
                                 </li>
-                                
+<!--                                
                                 <li>
                                     <a href="<?php echo site_url('tipo_persona');?>">
                                         <i class="fa fa-group"></i> <span>Tipo Persona</span>
                                     </a>
-                                </li>
+                                </li>-->
 
                                 
                             </ul>
@@ -254,7 +254,7 @@
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
-            <footer class="main-footer">
+            <footer class="main-footer no-print">
                 <strong> Desarrollado por <a href="https://www.passwordbolivia.com/" target="_blank">PASSWORD - Ingenieria Hardware & Software</a></strong>
             </footer>
 
