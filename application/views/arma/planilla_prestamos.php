@@ -17,7 +17,7 @@
 <div class="box-header">
     <font class="color_fff" size='4' face='Arial'><b>Planilla de prestamos</b></font>
     <br><font class="color_fff" size='2' face='Arial'>Por fecha</font>
-    <div class="box-tools">
+    <div class="box-tools no-print">
         
         <?php echo form_open_multipart('arma/planilla_prestamos'); ?>
         
