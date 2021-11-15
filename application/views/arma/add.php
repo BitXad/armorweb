@@ -51,7 +51,7 @@
                                 <input type="text" name="arma_calibre" value="<?php echo $this->input->post('arma_calibre'); ?>" class="form-control" id="arma_calibre" />
                             </div>
                         </div>
-			<div class="col-md-3">
+                        <div class="col-md-3">
                             <label for="arma_aniodotacion" class="control-label">Año Dotación</label>
                             <div class="form-group">
                                 <input type="text" name="arma_aniodotacion" value="<?php echo $this->input->post('arma_aniodotacion'); ?>" class="form-control" id="arma_aniodotacion" />

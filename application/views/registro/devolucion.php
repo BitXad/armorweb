@@ -24,7 +24,7 @@
                         <div class="col-sm-6">
                             <label for="persona">Descripcion/Nombre</label>
                             <div class="form-group">
-                                <button class="btn btn-primary col-sm-12" >Buscar</button>
+                                <button class="btn btn-primary col-sm-12" data-toggle="modal" data-target="#modalbuscarpersona">Buscar</button>
                             </div>
                         </div>
                         <br>
@@ -124,6 +124,7 @@
 		</div>
     </div>
 </div>
+
 <!----------------------------------------------------- modal para armas ------------------------------------------->
 <div id="modal_entregar_arma" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="modal_entregar_arma" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -135,7 +136,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="formuladio_modal" action="" method="POST">
+                <form id="formuladio_modal" action="" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-4">
                             <figure>
@@ -148,7 +149,7 @@
                                 <input type="text" class="form-control" id="modal_arma" disabled>
                             </div>
                             <div class="form-group">
-                                <label for="arma">Entregado a </label>
+                                <label for="arma">Entregado a</label>
                                 <input type="text" class="form-control" id="modal_persona" disabled>
                             </div>
                             <div class="form-group">
@@ -168,7 +169,7 @@
                                 <input type="text" class="form-control" id="modal_devuelto" name="modal_devuelto">
                             </div>
                             <div class="form-group">
-                                <label for="modal_foto">Foto 1</label>
+                                <label for="modal_foto1">Foto 1</label>
                                 <input type="file" class="form-control" id="modal_foto1" name="modal_foto1">
                             </div>
                             <div class="form-group">
@@ -192,8 +193,77 @@
 </div>
 <!----------------------------------------------------- modal para armas ------------------------------------------->
 
-<!----------------------------------------------- modal para armas no entregadas -------------------------------------->
-<!----------------------------------------------- modal para armas no entregadas -------------------------------------->
+<!----------------------------------------------- modal para imagen -------------------------------------->
+<div id="modal_foto_arma" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal_foto_arma" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <form id="form-foto-arma">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="modal_foto1">Foto</label>
+                                <input type="file" class="form-control" id="modal2_foto1" name="modal2_foto1">
+                                <input type="hidden" id="detregistro_id" name="detregistro_id">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="modal_foto2">Foto 2</label>
+                                <input type="file" class="form-control" id="modal2_foto2" name="modal2_foto2">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="modal_foto3">Foto 3</label>
+                                <input type="file" class="form-control" id="modal2_foto3" name="modal2_foto3">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button class="btn btn-primary" onclick="guardar_fotos()">Guardar</button>
+            </div>    
+        </div>
+    </div>
+</div>
+<!----------------------------------------------- modal para imagen -------------------------------------->
+<!----------------------------------------------- modal buscar persona -------------------------------------->
+<div class="modal fade" id="modalbuscarpersona" tabindex="-1" role="dialog" aria-labelledby="modalbuscarpersonalabel">
+    <div class="modal-dialog" role="document">
+        <br><br>
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                <span class="text-bold">Buscar Persona</span>
+                <div class="col-md-12" style="padding-left: 0px">
+                    <div class="input-group">
+                        <span class="input-group-addon"> Buscar </span>
+                        <input id="buscar_lapersona" name="buscar_lapersona" type="text" class="form-control" placeholder="Ingrese el nombre, apellidos o c.i. de la persona"  onkeypress="buscarpersona(event)" autofocus>
+                        <div style="border-color: #008d4c; background: #008D4C !important; color: white" class="btn btn-success input-group-addon" onclick="tablarepersona()"><span class="fa fa-search"></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body" style="padding-bottom: 0px !important">
+                <div class="row no-print" id='loader_bpersona'  style='display:none;'>
+                    <center>
+                        <img src="<?php echo base_url("resources/images/loader.gif"); ?>"  >        
+                    </center>
+                </div>
+                <!------------------------------------------------------------------->
+                <div class="col-md-12 no-print" id="tablarepersona"></div>
+                <!------------------------------------------------------------------->
+            </div>
+            <div class="modal-footer aligncenter">
+                <a href="#" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-times"></span> Cancelar</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!----------------------------------------------- modal buscar persona -------------------------------------->
+
 
 
 <script src="<?= site_url("resources/js/devolucion.js") ?>"></script>

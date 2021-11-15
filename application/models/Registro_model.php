@@ -161,7 +161,7 @@ class Registro_model extends CI_Model
             left join persona p on r.persona_id = p.persona_id
             left join estado e on r.estado_id = e.estado_id 
             where 1=1
-            and r.estado_id = 7
+            and r.estado_id = 5
             and r.persona_id = $persona_id"
         )->result_array();
     }
@@ -196,8 +196,8 @@ class Registro_model extends CI_Model
             left join persona p on r.persona_id  = p.persona_id 
             left join tipo_arma ta on a.tipoarma_id = ta.tipoarma_id 
             where 1=1
-            and r.estado_id = 8
-            and dr.estado_id = 7
+            and r.estado_id = 6
+            and dr.estado_id = 5
             and p.persona_id = $persona_id"
         )->result_array();
     }
@@ -213,5 +213,8 @@ class Registro_model extends CI_Model
             and dr.detregistro_id  = $detregistro_id"
         )->result_array();
     }
-
+    function add_imagen($params){
+        $this->db->insert('imagen',$params);
+        return $this->db->insert_id();        
+    }
 }
