@@ -3,6 +3,11 @@ document.querySelector("#persona_ci").addEventListener("keyup", event => {
         buscar_ci();
 });
 
+document.querySelector("#buscar_lapersona").addEventListener("keyup", event => {
+    if(event.key == "Enter") 
+        tablarepersona();
+});
+
 document.querySelector("#arma_codigo").addEventListener("keyup", event => {
     if(event.key == "Enter") 
         buscar_arma();
@@ -303,7 +308,7 @@ function tablarepersona(){
                 var registros =  JSON.parse(respuesta);
                 if (registros != null){
                     // var n = registros.length; //tama«Ðo del arreglo de la consult            
-                    html = `<table class='table table-striped no-print' id='mitabla'>";
+                    html = `<table class='table table-striped no-print' id='mitabla'>
                                 <tr>
                                     <th>N</th>
                                     <th>Cliente</th>

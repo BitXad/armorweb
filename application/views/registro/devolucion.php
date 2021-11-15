@@ -15,7 +15,7 @@
                         <div class="col-sm-6">
                             <label for="persona_ci">C.I.</label>
                             <div class="input-group">
-                                <input id="persona_ci" name="persona_ci" type="text" class="form-control" placeholder="Ingrese el C.I.">
+                                <input id="persona_ci" name="persona_ci" type="text" class="form-control" placeholder="Ingrese el C.I." autocomplete="off">
                                 <span class="input-group-btn">
                                     <button class="btn btn-primary" type="button" onclick="buscar_ci()"><i class="fa fa-search" aria-hidden="true"></i></button>
                                 </span>
@@ -89,6 +89,7 @@
                     <div class="col-sm-12 col-md-12"></div>
                     <div class="col-sm-12 col-md-5">
                         <section id="registros" style="display: none;">
+                            <h4 class="text-center">Todos sus registros</h4>
                             <table class="table" >
                                 <thead>
                                     <tr>
@@ -102,6 +103,7 @@
                             </table>
                         </section>
                         <section id="armas" style="display: none;">
+                            <h4 class="text-center">Armas que falta devolver</h4>
                             <table class="table">
                                 <thead>
                                     <tr>
