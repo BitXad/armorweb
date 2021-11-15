@@ -29,7 +29,7 @@ function tablarepersona(){
                     html += "<tr>";
                     html += "<th>N</th>";
                     //html += "<th>ID</th>";
-                    html += "<th>Cliente</th>";
+                    html += "<th>Persona</th>";
                     html += "<th></th>";
                     html += "</tr>";
                     html += "<tbody class='buscar' id='tablarepersona'>";
@@ -244,7 +244,7 @@ function registrar_salida(){
                     document.getElementById('loader_arma').style.display = 'none';
                     get_detalle_registro_aux();
                     limpiar_infpersona();
-                    window.open(base_url+"registro/imprimir_factura_id/"+factura_id, '_blank');
+                    window.open(base_url+"registro/comprobantepres/"+registros, '_blank');
                 }else{
                     document.getElementById('loader_arma').style.display = 'none';
                 }

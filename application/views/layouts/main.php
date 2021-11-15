@@ -108,7 +108,7 @@
                             <ul class="treeview-menu">
                                 
                                 <li>
-                                    <a href="<?php echo site_url('arma');?>">
+                                        <a href="<?php echo site_url('salida_armamento');?>">
                                         <i class="fa fa-legal"></i> <span>Salida de Armamento</span>
                                     </a>
                                 </li>
